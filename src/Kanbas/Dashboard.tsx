@@ -24,13 +24,13 @@ export default function Dashboard() {
           <img src="/images/reactjs.jpg" width={200} />
           <div>
             <Link className="wd-dashboard-course-link"
-              to="/Kanbas/Courses/1235/Home">
+              to="/Kanbas/Courses/1234/Home">
               CS1235 React JS Intermediate
             </Link>
             <p className="wd-dashboard-course-title">
                 Full Stack software developer Intermediate
             </p>
-            <Link to="/Kanbas/Courses/1235/Home"> Go </Link>
+            <Link to="/Kanbas/Courses/1234/Home"> Go </Link>
           </div>
         </div>
         <br/>
@@ -38,13 +38,13 @@ export default function Dashboard() {
           <img src="/images/reactjs.jpg" width={200} />
           <div>
             <Link className="wd-dashboard-course-link"
-              to="/Kanbas/Courses/1236/Home">
+              to="/Kanbas/Courses/1234/Home">
               CS1236 React JS Advanced
             </Link>
             <p className="wd-dashboard-course-title">
                 Full Stack software developer Advanced
             </p>
-            <Link to="/Kanbas/Courses/1236/Home"> Go </Link>
+            <Link to="/Kanbas/Courses/1234/Home"> Go </Link>
           </div>  
         </div>
         <br/>
@@ -52,13 +52,13 @@ export default function Dashboard() {
           <img src="/images/reactjs.jpg" width={200} />
           <div>
             <Link className="wd-dashboard-course-link"
-              to="/Kanbas/Courses/1244/Home">
+              to="/Kanbas/Courses/1234/Home">
               CS1244
             </Link>
             <p className="wd-dashboard-course-title">
                 Intro to Computer Networking
             </p>
-            <Link to="/Kanbas/Courses/1244/Home"> Go </Link>
+            <Link to="/Kanbas/Courses/1234/Home"> Go </Link>
           </div>  
         </div>
         <br/>
@@ -66,13 +66,13 @@ export default function Dashboard() {
           <img src="/images/reactjs.jpg" width={200} />
           <div>
             <Link className="wd-dashboard-course-link"
-              to="/Kanbas/Courses/1254/Home">
+              to="/Kanbas/Courses/1234/Home">
               CS1254
             </Link>
             <p className="wd-dashboard-course-title">
                 Intermediate Computer Networking
             </p>
-            <Link to="/Kanbas/Courses/1254/Home"> Go </Link>
+            <Link to="/Kanbas/Courses/1234/Home"> Go </Link>
           </div>  
         </div>
         <br/>
@@ -82,13 +82,13 @@ export default function Dashboard() {
           <img src="/images/reactjs.jpg" width={200} />
           <div>
             <Link className="wd-dashboard-course-link"
-              to="/Kanbas/Courses/1264/Home">
+              to="/Kanbas/Courses/1234/Home">
               CS1264
             </Link>
             <p className="wd-dashboard-course-title">
                 Advanced Computer Networking
             </p>
-            <Link to="/Kanbas/Courses/1264/Home"> Go </Link>
+            <Link to="/Kanbas/Courses/1234/Home"> Go </Link>
           </div>  
         </div>
         <br/>
@@ -98,13 +98,13 @@ export default function Dashboard() {
           <img src="/images/reactjs.jpg" width={200} />
           <div>
             <Link className="wd-dashboard-course-link"
-              to="/Kanbas/Courses/5002/Home">
+              to="/Kanbas/Courses/1234/Home">
               CS5002
             </Link>
             <p className="wd-dashboard-course-title">
                 Discrete Structures
             </p>
-            <Link to="/Kanbas/Courses/5002/Home"> Go </Link>
+            <Link to="/Kanbas/Courses/1234/Home"> Go </Link>
           </div>  
         </div>
         <br/>
@@ -114,13 +114,13 @@ export default function Dashboard() {
           <img src="/images/reactjs.jpg" width={200} />
           <div>
             <Link className="wd-dashboard-course-link"
-              to="/Kanbas/Courses/5004/Home">
+              to="/Kanbas/Courses/1234/Home">
               CS5004
             </Link>
             <p className="wd-dashboard-course-title">
                 Object Oriented Design
             </p>
-            <Link to="/Kanbas/Courses/5004/Home"> Go </Link>
+            <Link to="/Kanbas/Courses/1234/Home"> Go </Link>
           </div>  
         </div>
         <br/>
