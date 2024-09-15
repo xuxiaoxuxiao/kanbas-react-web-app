@@ -48,7 +48,6 @@ export default function Assignments() {
                 <span className="wd-assignment-list-item"><b>Due </b> May 27 at 11:59pm </span>
                 |
                 <span className="wd-assignment-list-item"> 100 pts</span>
-            {/* Complete On Your Own */}
             </li>
         </ul>
       </div>
