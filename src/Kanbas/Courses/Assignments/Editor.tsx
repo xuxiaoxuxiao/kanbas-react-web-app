@@ -108,6 +108,8 @@ export default function AssignmentEditor() {
           <input type="date"id="wd-available-until"value="2024-05-13"/><br/>
           </td>
           </tr>
+          
+      
 
         {/* Complete on your own */}
       
@@ -120,6 +122,4 @@ export default function AssignmentEditor() {
         </td>
       </table>
       </div>
-
-  
 );}
