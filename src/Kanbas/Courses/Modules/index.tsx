@@ -9,8 +9,11 @@ export default function Modules() {
           <button id="wd-view-progress" onClick={() => alert("View Progress")} type="button">
             View Progress</button>
 
-          <button id="wd-publish-all" onClick={() => alert("Publish All")} type="button">
-            Publish All</button>
+          <select id="wd-publish-all">
+            <option value= "pulish-all">Publish</option>
+            <option selected value= "pulish-all">Publish All</option>
+          </select>
+
           <button id="wd-add-module" onClick={() => alert("Add a Module")} type="button">
             + Module</button>
         </div>
