@@ -13,6 +13,11 @@ import GridLayout from "./GridLayout";
 import Flex from "./Flex";
 import ReactIconsSampler from "./ReactIcons";
 import BootstrapGrids from "./BootstrapGrids";
+import ScreenSizeLabel from "./ScreenSizeLabel";
+import BootstrapTables from "./BootstrapTables";
+import BootstrapLists from "./BootstrapLists";
+import BootstrapForms from "./BootstrapForms";
+import BootstrapNavigation from "./BootstrapNavigation";
 
 export default function Lab2() {
   return (
@@ -80,6 +85,11 @@ export default function Lab2() {
       <Flex />
       <ReactIconsSampler />
       <BootstrapGrids />
+      <ScreenSizeLabel />
+      <BootstrapTables />
+      <BootstrapLists />
+      <BootstrapForms />
+      <BootstrapNavigation />
     </div>
   );
 }
