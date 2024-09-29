@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 export default function KanbasNavigation() {
   return (
-    <div id="wd-kanbas-navigation" style={{ width: 120 }} 
+    <div id="wd-kanbas-navigation" style={{ width: 110 }} 
          className="list-group rounded-0 position-fixed bottom-0 top-0 d-none d-md-block bg-black z-2">
       <a id="wd-neu-link" target="_blank" href="https://www.northeastern.edu/"
         className="list-group-item bg-black border-0 text-center">

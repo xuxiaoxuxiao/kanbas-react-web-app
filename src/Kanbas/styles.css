@@ -6,3 +6,8 @@ body * {  font-family: Arial, Helvetica, sans-serif;  }
     padding-left: 140px !important;
   }
 }
+.list-group.wd > .list-group-item.active {
+  color: black;
+  background-color: white;
+  border-left: 3px solid black !important;
+}
