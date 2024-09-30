@@ -53,7 +53,7 @@ export default function KanbasNavigation() {
             : "list-group-item text-center border-0 bg-black text-white"
         }
       >
-        <FaRegCalendarAlt className="fs-1" />
+        <FaRegCalendarAlt className="fs-1 text-danger" />
         <br />
         Calendar
       </NavLink>
@@ -68,7 +68,7 @@ export default function KanbasNavigation() {
             : "list-group-item text-center border-0 bg-black text-white"
         }
       >
-        <FaInbox className="fs-1" />
+        <FaInbox className="fs-1 text-danger" />
         <br />
         Inbox
       </NavLink>
@@ -82,7 +82,7 @@ export default function KanbasNavigation() {
             : "list-group-item text-center border-0 bg-black text-white"
         }
       >
-        <PiGear className="fs-1" />
+        <PiGear className="fs-1 text-danger" />
         <br />
         Labs
       </NavLink>
