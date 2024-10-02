@@ -70,7 +70,7 @@ export default function Assignments() {
         <li className="wd-assignment list-group-item p-0 mb-5 fs-5 border-gray">
           <div className="wd-title p-3 ps-2 bg-light"> 
             <BsGripVertical className="wd-assignments-title me-2 fs-3" />
-              ASSIGNMENTS 40% of Total
+              ASSIGNMENTS 
             <AssignmentsControlButtons />
           </div>
 
