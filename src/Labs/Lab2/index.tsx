@@ -22,16 +22,14 @@ import BootstrapNavigation from "./BootstrapNavigation";
 export default function Lab2() {
   return (
     <div className="container">
-      <h2>Lab 2 - Cascading Style Sheets</h2>
-      <h3>Styling with the STYLE attribute</h3>
+
+      <h2><b>Lab 2 - Cascading Style Sheets</b></h2>
+      <h3><b>Styling with the STYLE attribute</b></h3>
       {/* <p style={{ backgroundColor: "blue",
                   color: "white" }}> */}
-        <p>
-        Style attribute allows configuring look and feel
-        right on the element. Although it's very convenient
-        it is considered bad practice and you should avoid
-        using the style attribute
-      </p>
+        <p id ="wd-312">
+        Style attribute allows configuring look and feel right on the element. Although it's very convenient it is considered bad practice and you should avoid using the style attribute
+        </p>
 
       <div id="wd-css-id-selectors">
         <h3>ID selectors</h3>

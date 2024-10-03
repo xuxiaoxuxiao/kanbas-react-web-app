@@ -16,7 +16,7 @@ export default function BootstrapForms() {
                         rows={3}></textarea>
             </div></div>
             <div id="wd-css-styling-dropdowns">
-                <h3>Dropdowns</h3>
+                <h3>Select</h3>
                 <select className="form-select">
                     <option selected>Open this select menu</option>
                     <option value="1">One</option>
