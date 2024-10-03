@@ -14,10 +14,34 @@ export default function KanbasNavigation() {
         className="list-group-item bg-black border-0 text-center">
         <img src="/images/NEU.png" width="75px" />
       </a>
-      <Link to="/Kanbas/Account" id="wd-account-link"className="list-group-item text-center border-0 bg-black text-white">
+
+      <NavLink
+        to="/Kanbas/Account"
+        className={({ isActive }) =>
+          isActive
+            ? "list-group-item text-center border-0 bg-white text-danger"
+            : "list-group-item text-center border-0 bg-black text-white"
+        }>
+        <FaRegCircleUser className="fs-1 " />
+        <br />
+        Account
+      </NavLink>
+
+      {/* <NavLink
+        to="/Kanbas/Account" id="wd-account-link"
+        className={({ isActive }) =>
+          isActive
+        ? "list-group-item text-center border-0 bg-white text-white"
+        : "list-group-item text-center border-0 bg-black text-danger"
+        }>
+        <FaRegCircleUser className="fs-1 text-white" /><br />
+          Account
+      </NavLink> */}
+
+      {/* <Link to="/Kanbas/Account" id="wd-account-link"className="list-group-item text-center border-0 bg-black text-white">
         <FaRegCircleUser className="fs-1 text text-white" /><br />
         Account 
-      </Link>
+      </Link> */}
 
       <NavLink
         to="/Kanbas/Dashboard"
