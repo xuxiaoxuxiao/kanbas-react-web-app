@@ -10,7 +10,7 @@ export default function Dashboard() {
             <div className="card rounded-3 overflow-hidden">
               <Link className="wd-dashboard-course-link text-decoration-none text-dark"
                 to="/Kanbas/Courses/1234/Home">
-                <img src="/images/reactjs.jpg" width="100%" height={160}/>
+                <img src="/images/darkblue.jpg" width="100%" height={160}/>
                 <div className="card-body">
                   <h5 className="wd-dashboard-course-title card-title">
                     CS1234 React JS
@@ -28,7 +28,7 @@ export default function Dashboard() {
             <div className="card rounded-3 overflow-hidden">
               <Link className="wd-dashboard-course-link text-decoration-none text-dark"
                 to="/Kanbas/Courses/1234/Home">
-                <img src="/images/reactjs.jpg" width="100%" height={160}/>
+                <img src="/images/babyblue.jpg" width="100%" height={160}/>
                 <div className="card-body">
                   <h5 className="wd-dashboard-course-title card-title">
                     CS5002
@@ -46,7 +46,7 @@ export default function Dashboard() {
             <div className="card rounded-3 overflow-hidden">
               <Link className="wd-dashboard-course-link text-decoration-none text-dark"
                 to="/Kanbas/Courses/1234/Home">
-                <img src="/images/reactjs.jpg" width="100%" height={160}/>
+                <img src="/images/babyblue.jpg" width="100%" height={160}/>
                 <div className="card-body">
                   <h5 className="wd-dashboard-course-title card-title">
                     CS5004
@@ -64,7 +64,7 @@ export default function Dashboard() {
             <div className="card rounded-3 overflow-hidden">
               <Link className="wd-dashboard-course-link text-decoration-none text-dark"
                 to="/Kanbas/Courses/1234/Home">
-                <img src="/images/reactjs.jpg" width="100%" height={160}/>
+                <img src="/images/babyblue.jpg" width="100%" height={160}/>
                 <div className="card-body">
                   <h5 className="wd-dashboard-course-title card-title">
                     CS5005
@@ -82,7 +82,7 @@ export default function Dashboard() {
             <div className="card rounded-3 overflow-hidden">
               <Link className="wd-dashboard-course-link text-decoration-none text-dark"
                 to="/Kanbas/Courses/1234/Home">
-                <img src="/images/reactjs.jpg" width="100%" height={160}/>
+                <img src="/images/babyblue.jpg" width="100%" height={160}/>
                 <div className="card-body">
                   <h5 className="wd-dashboard-course-title card-title">
                     CS5008
@@ -100,7 +100,7 @@ export default function Dashboard() {
             <div className="card rounded-3 overflow-hidden">
               <Link className="wd-dashboard-course-link text-decoration-none text-dark"
                 to="/Kanbas/Courses/1234/Home">
-                <img src="/images/reactjs.jpg" width="100%" height={160}/>
+                <img src="/images/babyblue.jpg" width="100%" height={160}/>
                 <div className="card-body">
                   <h5 className="wd-dashboard-course-title card-title">
                     CS5009
@@ -118,7 +118,7 @@ export default function Dashboard() {
             <div className="card rounded-3 overflow-hidden">
               <Link className="wd-dashboard-course-link text-decoration-none text-dark"
                 to="/Kanbas/Courses/1234/Home">
-                <img src="/images/reactjs.jpg" width="100%" height={160}/>
+                <img src="/images/darkblue.jpg" width="100%" height={160}/>
                 <div className="card-body">
                   <h5 className="wd-dashboard-course-title card-title">
                     CS5610
@@ -136,7 +136,7 @@ export default function Dashboard() {
             <div className="card rounded-3 overflow-hidden">
               <Link className="wd-dashboard-course-link text-decoration-none text-dark"
                 to="/Kanbas/Courses/1234/Home">
-                <img src="/images/reactjs.jpg" width="100%" height={160}/>
+                <img src="/images/blue.jpg" width="100%" height={160}/>
                 <div className="card-body">
                   <h5 className="wd-dashboard-course-title card-title">
                     CS5700
@@ -154,7 +154,7 @@ export default function Dashboard() {
             <div className="card rounded-3 overflow-hidden">
               <Link className="wd-dashboard-course-link text-decoration-none text-dark"
                 to="/Kanbas/Courses/1234/Home">
-                <img src="/images/reactjs.jpg" width="100%" height={160}/>
+                <img src="/images/blue.jpg" width="100%" height={160}/>
                 <div className="card-body">
                   <h5 className="wd-dashboard-course-title card-title">
                     CS5800
@@ -172,7 +172,7 @@ export default function Dashboard() {
             <div className="card rounded-3 overflow-hidden">
               <Link className="wd-dashboard-course-link text-decoration-none text-dark"
                 to="/Kanbas/Courses/1234/Home">
-                <img src="/images/reactjs.jpg" width="100%" height={160}/>
+                <img src="/images/blue.jpg" width="100%" height={160}/>
                 <div className="card-body">
                   <h5 className="wd-dashboard-course-title card-title">
                     CS5520
