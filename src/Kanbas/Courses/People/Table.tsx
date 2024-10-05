@@ -52,9 +52,24 @@ export default function PeopleTable() {
             </td>
             <td className="wd-login-id">004567894R</td>
             <td className="wd-section">S104</td>
-            <td className="wd-role">STUDENT</td>
+            <td className="wd-role">TA</td>
             <td className="wd-last-activity">2020-09-29</td>
             <td className="wd-total-activity">11:45:12</td>
+          </tr>
+
+          {/* Add at least 3 more users such as Bruce Wayne, Steve Rogers, and Natasha Romanoff */}
+
+          <tr>
+            <td className="wd-full-name text-nowrap">
+              <FaUserCircle className="me-2 fs-1 text-secondary" />
+              <span className="wd-first-name">Diana</span>{" "}
+              <span className="wd-last-name">Prince</span>
+            </td>
+            <td className="wd-login-id">006789016P</td>
+            <td className="wd-section">S105</td>
+            <td className="wd-role">STUDENT</td>
+            <td className="wd-last-activity">2020-09-26</td>
+            <td className="wd-total-activity">10:05:30</td>
           </tr>
 
           <tr>
@@ -70,9 +85,19 @@ export default function PeopleTable() {
             <td className="wd-total-activity">09:50:25</td>
           </tr>
 
-      
-
-          {/* Add at least 3 more users such as Bruce Wayne, Steve Rogers, and Natasha Romanoff */}
+          <tr>
+            <td className="wd-full-name text-nowrap">
+              <FaUserCircle className="me-2 fs-1 text-secondary" />
+              <span className="wd-first-name">Peter</span>{" "}
+              <span className="wd-last-name">Parker</span>
+            </td>
+            <td className="wd-login-id">008901238P</td>
+            <td className="wd-section">S107</td>
+            <td className="wd-role">STUDENT</td>
+            <td className="wd-last-activity">2020-09-24</td>
+            <td className="wd-total-activity">11:20:05</td>
+          </tr>
+          
         </tbody>
       </table>
     </div> );}
