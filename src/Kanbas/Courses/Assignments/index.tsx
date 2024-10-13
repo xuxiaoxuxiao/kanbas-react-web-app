@@ -26,7 +26,7 @@ export default function Assignments() {
           <ul className="wd-lesson list-group rounded-0">
             {/* Assignment Item 1 */}
             <li className="wd-assignment-list-item list-group-item p-3 ps-1 d-flex justify-content-between align-items-center">
-              <div className="d-flex align-items-start">
+              <div className="d-flex align-items-start align-items-center">
                 <BsGripVertical className="me-2 fs-3" />
                 <PiNotePencilBold className="me-2 fs-3" />
                 <div>
@@ -35,8 +35,8 @@ export default function Assignments() {
                   </a>
                   <div className="text-muted small">
                     <span className="text-danger">Multiple Modules</span> |
-                    <span> Not available until May 6 at 12:00am</span> |<br />
-                    <span> Due May 13 at 11:59pm</span> |
+                    <span> <b>Not available until </b>May 6 at 12:00am</span> |<br />
+                    <span> <b>Due </b>May 13 at 11:59pm</span> |
                     <span> 100 pts</span>
                   </div>
                 </div>
@@ -46,7 +46,7 @@ export default function Assignments() {
 
             {/* Assignment Item 2 */}
             <li className="wd-assignment-list-item list-group-item p-3 ps-1 d-flex justify-content-between align-items-center">
-              <div className="d-flex align-items-start">
+              <div className="d-flex align-items-start align-items-center">
                 <BsGripVertical className="me-2 fs-3" />
                 <PiNotePencilBold className="me-2 fs-3" />
                 <div>
@@ -55,8 +55,8 @@ export default function Assignments() {
                   </a>
                   <div className="text-muted small">
                     <span className="text-danger">Multiple Modules</span> |
-                    <span> Not available until May 13 at 12:00am</span> |<br />
-                    <span> Due May 20 at 11:59pm</span> |
+                    <span> <b>Not available until </b>May 13 at 12:00am</span> |<br />
+                    <span> <b>Due </b>May 20 at 11:59pm</span> |
                     <span> 100 pts</span>
                   </div>
                 </div>
@@ -66,7 +66,7 @@ export default function Assignments() {
 
             {/* Assignment Item 3 */}
             <li className="wd-assignment-list-item list-group-item p-3 ps-1 d-flex justify-content-between align-items-center">
-              <div className="d-flex align-items-start">
+              <div className="d-flex align-items-start align-items-center">
                 <BsGripVertical className="me-2 fs-3" />
                 <PiNotePencilBold className="me-2 fs-3" />
                 <div>
@@ -75,8 +75,8 @@ export default function Assignments() {
                   </a>
                   <div className="text-muted small">
                     <span className="text-danger">Multiple Modules</span> |
-                    <span> Not available until May 20 at 12:00am</span> |<br />
-                    <span> Due May 27 at 11:59pm</span> |
+                    <span> <b>Not available until </b>May 20 at 12:00am</span> |<br />
+                    <span> <b>Due</b> May 27 at 11:59pm</span> |
                     <span> 100 pts</span>
                   </div>
                 </div>
