@@ -1,11 +1,11 @@
 [
-    { "_id": "A101", "title": "Propulsion Assignment", "course": "RS101","due":"Oct 13 at 8:59pm ","points":"100","availability": "Oct 13 at 8:59pm"},
+    { "_id": "A101", "title": "Propulsion Assignment", "course": "RS101","due":"Oct 18 at 8:59pm ","points":"80","availability": "Oct 13 at 8:59pm", "description":"The assignment is available online Links to an external site. Submit a link to the landing page of your Web application running on Netlify."},
     { "_id": "A102", "title": "Combustion Analysis", "course": "RS101","due":"Oct 19 at 8:59pm ","points":"100","availability": "Oct 14 at 8:59pm" },
-    { "_id": "A103", "title": "Nozzle Design Project", "course": "RS101","due":"Oct 27 at 8:59pm ","points":"100","availability": "Oct 20 at 8:59pm"},
-    { "_id": "A201", "title": "Aerodynamics Quiz", "course": "RS102","due":"Oct 13 at 8:59pm ","points":"100","availability": "Oct 13 at 8:59pm" },
+    { "_id": "A103", "title": "Nozzle Design Project", "course": "RS101","due":"Oct 27 at 8:59pm ","points":"200","availability": "Oct 20 at 8:59pm"},
+    { "_id": "A201", "title": "Aerodynamics Quiz", "course": "RS102","due":"Oct 13 at 8:59pm ","points":"10","availability": "Oct 13 at 8:59pm" },
     { "_id": "A202", "title": "Flow Analysis", "course": "RS102","due":"Oct 19 at 8:59pm ","points":"100","availability": "Oct 14 at 8:59pm"},
     { "_id": "A203", "title": "Heating Analysis", "course": "RS102","due":"Oct 27 at 8:59pm ","points":"100","availability": "Oct 20 at 8:59pm"},
-    { "_id": "A301", "title": "Structural Design Task", "course": "RS103","due":"Oct 13 at 8:59pm ","points":"100","availability": "Oct 13 at 8:59pm"},
-    { "_id": "A302", "title": "Orbital Calculations", "course": "RS103","due":"Oct 19 at 8:59pm ","points":"100","availability": "Oct 14 at 8:59pm"},
+    { "_id": "A301", "title": "Structural Design Task", "course": "RS103","due":"Oct 13 at 8:59pm ","points":"20","availability": "Oct 13 at 8:59pm"},
+    { "_id": "A302", "title": "Orbital Calculations", "course": "RS103","due":"Oct 19 at 8:59pm ","points":"60","availability": "Oct 14 at 8:59pm"},
     { "_id": "A303", "title": "Systems Engineering Exam", "course": "RS103" ,"due":"Oct 13 at 8:59pm ","points":"100","availability": "Oct 13 at 8:59pm"}
   ]
