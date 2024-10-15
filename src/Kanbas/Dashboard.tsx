@@ -3,6 +3,12 @@ import * as db from "./Database";
 
 export default function Dashboard() {
   const courses = db.courses;
+
+  const imageExists = (src: string) => {
+    let img = new Image();
+    img.src = src;
+    return img.complete;  // Returns true if image exists, false if not
+  };
   return (
     <div id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
@@ -15,9 +21,26 @@ export default function Dashboard() {
             <div className="card rounded-3 overflow-hidden">
               <Link to={`/Kanbas/Courses/${course._id}/Home`}
                       className="wd-dashboard-course-link text-decoration-none text-dark" >
-                  <img src="/images/darkblue.jpg" width="100%" height={160}/>
+
+                  {/* Conditional image rendering */}
+                  {imageExists(`/images/${course._id}.jpg`) ? (
+                    <img
+                      src={`/images/${course._id}.jpg`}
+                      alt={`Image for ${course.name}`}
+                      className="card-img-top"
+                      style={{ height: "160px", objectFit: "cover" }}
+                    />
+                  ) : (
+                    <img
+                      src="/images/darkblue.jpg"
+                      alt="Default image"
+                      className="card-img-top"
+                      style={{ height: "160px", objectFit: "cover" }}
+                    />
+                  )}
+              
                 <div className="card-body">
-                  <h5 className="wd-dashboard-course-title card-title">
+                  <h5 className="wd-dashboard-course-title card-title overflow-y-hidden" style={{ height: "24px" }}>
                   {course.name} 
                   </h5>
                   <p className="wd-dashboard-course-title card-text overflow-y-hidden" style={{ maxHeight: 100 }}>
@@ -32,3 +55,5 @@ export default function Dashboard() {
         </div>
       </div>
     );}
+
+

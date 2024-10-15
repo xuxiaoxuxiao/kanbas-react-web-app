@@ -32,6 +32,7 @@ import Square from "../Lab2/Square";
 import Highlight from "./Highlight";
 import AddPathParameters from "./AddPathParameters";
 import PathParameters from "./PathParameters";
+import TemplateLiterals from "./TemplateLiterals";
 
 export default function Lab3() {
   console.log('Hello World!');
@@ -49,6 +50,7 @@ export default function Lab3() {
       <LegacyFunctions />
       <ArrowFunctions/>
       <ImpliedReturn />
+      <TemplateLiterals />
       <SimpleArrays />
       <ArrayIndexAndLength/>
       <AddingAndRemovingToFromArrays/>
