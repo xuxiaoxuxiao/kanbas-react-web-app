@@ -1,9 +1,27 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+
 export default function AccountNavigation() {
+  const location = useLocation(); // To determine the current path
+  const links = ["Signin", "Signup", "Profile"];
+
   return (
     <div id="wd-account-navigation" className="wd list-group fs-5 rounded-0">
-      <Link to="/Kanbas/Account/Signin"  className="list-group-item active border border-0" > Signin  </Link> 
-      <Link to="/Kanbas/Account/Signup" className="list-group-item text-danger border border-0"  > Signup  </Link> 
-      <Link to="/Kanbas/Account/Profile" className="list-group-item text-danger border border-0"> Profile </Link>
+      {links.map((link) => {
+        const path = `/Kanbas/Account/${link}`;
+        const isActive = location.pathname === path; // Simplified active check
+
+        return (
+          <Link
+            key={link}
+            to={path}
+            className={`list-group-item border-0 ${isActive ? 'active' : 'text-danger'}`}
+          >
+            {link} {/* Display the link name */}
+          </Link>
+        );
+      })}
     </div>
-);}
+  );
+}
+
+
