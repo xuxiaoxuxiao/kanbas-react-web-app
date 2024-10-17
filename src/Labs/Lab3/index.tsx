@@ -28,7 +28,7 @@ import DestructingImports from "./DestructingImports";
 import Classes from "./Classes";
 import Styles from "./Styles";
 import Add from "./Add";
-import Square from "../Lab2/Square";
+import Square from "../Lab3/Square";
 import Highlight from "./Highlight";
 import AddPathParameters from "./AddPathParameters";
 import PathParameters from "./PathParameters";
