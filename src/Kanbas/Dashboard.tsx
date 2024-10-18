@@ -25,7 +25,7 @@ export default function Dashboard() {
                     style={{ height: "160px", objectFit: "cover" }}
                   />
                   <div className="card-body">
-                    <h5 className="wd-dashboard-course-title card-title overflow-y-hidden" style={{ height: "35px" }}>
+                    <h5 className="wd-dashboard-course-title card-title overflow-y-hidden" style={{ height: "45px" }}>
                       {course.name}
                     </h5>
                     <p className="wd-dashboard-course-title card-text overflow-y-hidden" style={{ maxHeight: 100 }}>
