@@ -11,16 +11,16 @@ const [count, setCount] = useState(7);
       <button
         onClick={() => setCount(count +1)}
         id="wd-counter-up-click"
-        className="me-2 rounded border-0"
-        style={{ backgroundColor: "green", color: "white", marginRight: "10px" }}>
+        className="me-2 rounded border-0 btn btn-success"
+        >
         Up
       </button>
 
       <button
         onClick={() => setCount(count -1)}
         id="wd-counter-down-click"
-        className="rounded border-0" 
-        style={{backgroundColor: "red", color: "white" }}>
+        className="rounded border-0 btn btn-danger" 
+        >
         Down
       </button>
 <hr/></div>);}

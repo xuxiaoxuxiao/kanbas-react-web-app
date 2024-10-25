@@ -11,8 +11,7 @@ export default function ArrayStateVariable() {
     <div id="wd-array-state-variables">
       <h2>Array State Variable</h2>
       <button onClick={addElement}
-        className="me-2 mb-3 rounded border-0" 
-        style={{ backgroundColor: "green", color: "white" }}>
+        className="me-2 mb-3 rounded border-0 btn btn-success" >
         Add Element</button>
       <ul style={{ listStyleType: "none", paddingLeft: 0 }}>
         {array.map((item, index) => (
@@ -20,8 +19,8 @@ export default function ArrayStateVariable() {
           <span style={{ marginRight: "10px" }}>{item}</span>
             <button onClick={() => deleteElement(index)}
                     id="wd-delete-element-click"
-                    className="me-2 rounded border-0" 
-                    style={{ backgroundColor: "red", color: "white"}}>
+                    className="me-2 rounded border-0 btn btn-danger" >
+                   
               Delete</button>
           </li>
         ))}
