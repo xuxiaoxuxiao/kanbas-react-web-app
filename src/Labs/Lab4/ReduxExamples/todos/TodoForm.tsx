@@ -7,7 +7,7 @@ export default function TodoForm(
     const { todo } = useSelector((state: any) => state.todosReducer);
     const dispatch = useDispatch();
     return (
-        <div className="container ms-0 rounded p-3">
+        <div className="container ms-0 rounded">
             <li className="list-group-item">
                 <div className="d-flex align-items-center">
                     <input
