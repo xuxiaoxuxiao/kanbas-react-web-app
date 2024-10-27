@@ -1,3 +1,5 @@
+import { addModule, editModule, updateModule, deleteModule } from "./reducer";
+import { useSelector, useDispatch } from "react-redux";
 import ModuleControlButtons from "./ModuleControlButtons";
 import ModulesControls from "./ModulesControls";
 import LessonControlButtons from "./LessonControlButtons";
@@ -8,27 +10,19 @@ import React, { useState } from "react";
 
 export default function Modules() {
   const { cid } = useParams();
-  const [modules, setModules] = useState<any[]>(db.modules);
   const [moduleName, setModuleName] = useState("");
-  const addModule = () => {
-    setModules([ ...modules, { _id: new Date().getTime().toString(),
-                                     name: moduleName, course: cid, lessons: [] } ]);
-    setModuleName("");
-  };
-  const deleteModule = (moduleId: string) => {
-    setModules(modules.filter((m) => m._id !== moduleId));
-  };
+  const { modules } = useSelector((state: any) => state.modulesReducer);
+  const dispatch = useDispatch();
 
-  const editModule = (moduleId: string) => {
-    setModules(modules.map((m) => (m._id === moduleId ? { ...m, editing: true } : m)));  };
-    const updateModule = (module: any) => {
-      setModules(modules.map((m) => (m._id === module._id ? module : m)));
-  };
     return (
-      <div>
-        <div>
-          
-          <ModulesControls setModuleName={setModuleName} moduleName={moduleName} addModule={addModule} /><br /><br /><br /><br />
+        <div>  
+          <ModulesControls 
+          moduleName={moduleName} 
+          setModuleName={setModuleName} 
+          addModule={() => {
+            dispatch(addModule({ name: moduleName, course: cid }));
+            setModuleName("");}}/>
+          <br /><br /><br /><br />
           <ul id="wd-modules" className="list-group rounded-0">
             {modules
             .filter((module: any) => module.course === cid)
@@ -39,10 +33,10 @@ export default function Modules() {
                 {!module.editing && module.name}
                 { module.editing && (
                   <input className="form-control w-50 d-inline-block"
-                    onChange={(e) => updateModule({ ...module, name: e.target.value })}
+                    onChange={(e) => dispatch(updateModule({ ...module, name: e.target.value }))}
                     onKeyDown={(e) => {
                       if (e.key === "Enter") {
-                        updateModule({ ...module, editing: false });
+                        dispatch(updateModule({ ...module, editing: false }));
                       }
                     }}
                defaultValue={module.name}/>
@@ -51,8 +45,9 @@ export default function Modules() {
                 
                 <ModuleControlButtons  
                   moduleId={module._id}
-                  deleteModule={deleteModule}
-                  editModule={editModule}/>
+                  deleteModule={(moduleId) =>{ dispatch(deleteModule(moduleId))}}
+                  editModule={(moduleId) => dispatch(editModule(moduleId))} 
+                  />
               </div>
               {module.lessons && (
                 <ul className="wd-lessons list-group rounded-0">
@@ -67,7 +62,6 @@ export default function Modules() {
             </li>
             ))}
           </ul>
-        </div>
-      </div>
+        </div>  
   );}
   
