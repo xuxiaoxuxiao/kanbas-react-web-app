@@ -32,3 +32,4 @@ export default function TodoItem({ todo }: { todo: { id: string; title: string }
     </div>
   );
 }
+

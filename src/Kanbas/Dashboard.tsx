@@ -2,39 +2,46 @@ import { Link } from "react-router-dom";
 import * as db from "./Database";
 import React, { useState } from "react";
 
-export default function Dashboard() {
-  const [courses, setCourses] = useState<any[]>(db.courses);
+export default function Dashboard(
   
-  const [course, setCourse] = useState<any>({
-    _id: "0", name: "New Course", number: "New Number",
-    startDate: "2023-09-10", endDate: "2023-12-15",
-    image: "/images/reactjs.jpg", description: "New Description" 
-  });
+  { courses, course, setCourse, addNewCourse,
+    deleteCourse, updateCourse }: {
+    courses: any[]; course: any; setCourse: (course: any) => void;
+    addNewCourse: () => void; deleteCourse: (course: any) => void;
+    updateCourse: () => void; }
+) {
+  // const [courses, setCourses] = useState<any[]>(db.courses);
+  
+  // const [course, setCourse] = useState<any>({
+  //   _id: "0", name: "New Course", number: "New Number",
+  //   startDate: "2023-09-10", endDate: "2023-12-15",
+  //   image: "/images/reactjs.jpg", description: "New Description" 
+  // });
 
-  const addNewCourse = () => {
-    const newCourse = { ...course, _id: new Date().getTime().toString() };
-    setCourses([...courses, newCourse]);
-    setCourse({
-      _id: "0", name: "New Course", number: "New Number",
-      startDate: "2023-09-10", endDate: "2023-12-15",
-      image: "/images/reactjs.jpg", description: "New Description"
-    });
-  };
+  // const addNewCourse = () => {
+  //   const newCourse = { ...course, _id: new Date().getTime().toString() };
+  //   setCourses([...courses, newCourse]);
+  //   setCourse({
+  //     _id: "0", name: "New Course", number: "New Number",
+  //     startDate: "2023-09-10", endDate: "2023-12-15",
+  //     image: "/images/reactjs.jpg", description: "New Description"
+  //   });
+  // };
 
-  const deleteCourse = (courseId: string) => {
-    setCourses(courses.filter((c) => c._id !== courseId));
-  };
+  // const deleteCourse = (courseId: string) => {
+  //   setCourses(courses.filter((c) => c._id !== courseId));
+  // };
 
-  const updateCourse = () => {
-    setCourses(
-      courses.map((c) => c._id === course._id ? course : c)
-    );
-    setCourse({
-      _id: "0", name: "New Course", number: "New Number",
-      startDate: "2023-09-10", endDate: "2023-12-15",
-      image: "/images/reactjs.jpg", description: "New Description"
-    });
-  };
+  // const updateCourse = () => {
+  //   setCourses(
+  //     courses.map((c) => c._id === course._id ? course : c)
+  //   );
+  //   setCourse({
+  //     _id: "0", name: "New Course", number: "New Number",
+  //     startDate: "2023-09-10", endDate: "2023-12-15",
+  //     image: "/images/reactjs.jpg", description: "New Description"
+  //   });
+  // };
 
   return (
     <div id="wd-dashboard">

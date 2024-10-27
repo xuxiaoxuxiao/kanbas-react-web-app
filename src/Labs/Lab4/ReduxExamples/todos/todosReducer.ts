@@ -11,7 +11,7 @@ const todosSlice = createSlice({
   initialState,
   reducers: {
     addTodo: (state, action) => {
-      const newTodos = [...state.todos,
+      const newTodos = [      ...state.todos,
         { ...action.payload, id: new Date().getTime().toString() },
       ];
       state.todos = newTodos;
