@@ -67,11 +67,12 @@ export default function Assignments() {
                   </div>
                 </div>
               </div>
-              <AssignmentControlButtons AssignmentId={""} deleteAssignment={function (AssignmentId: string): void {
+              {isFaculty && (<AssignmentControlButtons AssignmentId={""} deleteAssignment={function (AssignmentId: string): void {
                 throw new Error("Function not implemented.");
               } } editAssignment={function (AssignmentId: string): void {
                 throw new Error("Function not implemented.");
-              } } />
+              } } />)}
+
             </li>
           ))}
         </ul>
