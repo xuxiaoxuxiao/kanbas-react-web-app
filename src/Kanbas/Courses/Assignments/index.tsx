@@ -9,16 +9,18 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AssignmentsControls from "./AssignmentsControls";
 import { addAssignment } from "./reducer";
-import AssignmentsControlButtons from "./AssignmentsControlButtons";
+import AssignmentsHeaderButtons from "./AssignmentsHeaderButtons";
+import AssignmentControlButtons from "./AssignmentControlButtons";
 
 
 export default function Assignments() {
   const { cid } = useParams();
   const [assignmentName, setAssignmentName] = useState("");
-  const assignments = db.assignments.filter((assignment) => assignment.course === cid); // Filter assignments for the course
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const dispatch = useDispatch();
-
+  //const [assignments, setAssignments] = useState<any[]>(db.assignments);
+  const assignments = db.assignments.filter((assignment) => assignment.course === cid); 
+  const setAssignments = useState<any[]>(db.assignments);
   const isFaculty = currentUser?.role === "FACULTY";
   return (
     <div id="wd-assignments">
@@ -44,7 +46,7 @@ export default function Assignments() {
             <BsGripVertical className="wd-assignments-title me-2 fs-3" />
             ASSIGNMENTS
           </div>
-          <AssignmentsControlButtons />
+          <AssignmentsHeaderButtons />
         </div>
 
         <ul className="wd-lesson list-group rounded-0">
@@ -65,7 +67,11 @@ export default function Assignments() {
                   </div>
                 </div>
               </div>
-              <LessonControlButtons />
+              <AssignmentControlButtons AssignmentId={""} deleteAssignment={function (AssignmentId: string): void {
+                throw new Error("Function not implemented.");
+              } } editAssignment={function (AssignmentId: string): void {
+                throw new Error("Function not implemented.");
+              } } />
             </li>
           ))}
         </ul>
