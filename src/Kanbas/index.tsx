@@ -10,6 +10,7 @@ import Labs from "../Labs";
 import * as db from "./Database";
 import { useState } from "react";
 import ProtectedRoute from "./Account/ProtectedRoute";
+import { addAssignment } from "./Courses/Assignments/reducer";
 
 export default function Kanbas() {
   const [courses, setCourses] = useState<any[]>(db.courses);
@@ -52,6 +53,8 @@ export default function Kanbas() {
               addNewCourse={addNewCourse}
               deleteCourse={deleteCourse}
               updateCourse={updateCourse}/>
+      
+              {/* addAssignment={addAssignment} */}
             </ProtectedRoute>
           }/>
           <Route path="Courses/:cid/*" element={<ProtectedRoute><Courses courses={courses} /></ProtectedRoute> } />
