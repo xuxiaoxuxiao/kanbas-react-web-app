@@ -28,6 +28,8 @@ export default function Courses({ courses }: { courses: any[]; }) {
                 <Route path="Modules" element={<Modules />} />
                 <Route path="Assignments" element={<Assignments />} />
                 <Route path="Assignments/:aid" element={<AssignmentEditor />} />
+                <Route path="/Kanbas/Courses/:cid/AssignmentsEditor" element={<AssignmentEditor />} />
+
                 <Route path="People" element={<PeopleTable />} />
               </Routes>
             </div>

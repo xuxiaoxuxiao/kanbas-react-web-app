@@ -23,13 +23,16 @@ export default function Assignments() {
   return (
     <div id="wd-assignments">
      {isFaculty && (
-    <AssignmentsControls assignmentName={assignmentName} 
-          setAssignmentName={setAssignmentName} 
-          addAssignment={() => {
-            dispatch(addAssignment({ name: assignmentName, course: cid }));
-            setAssignmentName("");
-          }}/>
-      )}
+       <AssignmentsControls 
+         assignmentName={assignmentName}
+         setAssignmentName={setAssignmentName}
+         addAssignment={() => {
+           dispatch(addAssignment({ name: assignmentName, course: cid }));
+           setAssignmentName("");
+         }}
+         cid={cid || ""} // Pass the actual cid value here
+       />
+     )}
       
     <br /><br />
   
