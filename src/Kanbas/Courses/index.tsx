@@ -2,14 +2,17 @@ import CoursesNavigation from "./Navigation";
 import Modules from "./Modules";
 import Home from "./Home";
 import { Navigate, Route, Routes, useParams, useLocation} from "react-router";
-import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
 import { FaAlignJustify } from "react-icons/fa";
 import PeopleTable from "./People/Table";
-export default function Courses({ courses }: { courses: any[]; }) {
+import Assignments from "./Assignments";
+function Courses({ courses }: { courses: any[]; }) {
+  const { courseId } = useParams();
+  const course = courses.find((course) => course._id === courseId);
+
   const { cid } = useParams();
-  const course = courses.find((course) => course._id === cid);
   const { pathname } = useLocation();
+
   return (
     <div id="wd-courses">  
       <h2 className="text-danger">
@@ -27,8 +30,8 @@ export default function Courses({ courses }: { courses: any[]; }) {
                 <Route path="Home" element={<Home />} />
                 <Route path="Modules" element={<Modules />} />
                 <Route path="Assignments" element={<Assignments />} />
-                <Route path="Assignments/:aid" element={<AssignmentEditor />} />
-                <Route path="/Kanbas/Courses/:cid/AssignmentsEditor" element={<AssignmentEditor />} />
+                <Route path="Assignments/Editor" element={<AssignmentEditor />} />
+                <Route path="Assignments/:assignmentId" element={<AssignmentEditor />} />
 
                 <Route path="People" element={<PeopleTable />} />
               </Routes>
@@ -36,3 +39,4 @@ export default function Courses({ courses }: { courses: any[]; }) {
           </div>
       </div>
 );}
+export default Courses;

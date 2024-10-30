@@ -10,9 +10,9 @@ import Labs from "../Labs";
 import * as db from "./Database";
 import { useState } from "react";
 import ProtectedRoute from "./Account/ProtectedRoute";
-import { addAssignment } from "./Courses/Assignments/reducer";
+;
 
-export default function Kanbas() {
+function Kanbas() {
   const [courses, setCourses] = useState<any[]>(db.courses);
   const [course, setCourse] = useState<any>({
     _id: "1234", name: "New Course", number: "New Number",
@@ -64,3 +64,4 @@ export default function Kanbas() {
     </Provider>
 
   );}
+  export default Kanbas;

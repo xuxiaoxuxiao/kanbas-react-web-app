@@ -2,86 +2,93 @@ import { BsGripVertical } from "react-icons/bs";
 import { PiNotePencilBold } from "react-icons/pi";
 import LessonControlButtons from "../Modules/LessonControlButtons";
 
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import * as db from "../../Database";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AssignmentsControls from "./AssignmentsControls";
-import { addAssignment } from "./reducer";
+import { addAssignment, deleteAssignment } from "./assignmentsReducer";
 import AssignmentsHeaderButtons from "./AssignmentsHeaderButtons";
 import AssignmentControlButtons from "./AssignmentControlButtons";
+import { KanbasState } from "../../store";
+import { BsPlus } from "react-icons/bs";
+import { FaCheckCircle, FaCircle, FaSearch } from "react-icons/fa";
+import { FaPencil } from "react-icons/fa6";
 
 
-export default function Assignments() {
-  const { cid } = useParams();
-  const [assignmentName, setAssignmentName] = useState("");
-  const { currentUser } = useSelector((state: any) => state.accountReducer);
+
+function Assignments() {
+  const { courseId } = useParams();
+  const assignmentsList = useSelector((state: KanbasState) =>
+    state.assignmentsReducer.assignments);
+  const assignmentList = assignmentsList.filter((a) => a.course === courseId);
   const dispatch = useDispatch();
-  //const [assignments, setAssignments] = useState<any[]>(db.assignments);
-  const assignments = db.assignments.filter((assignment) => assignment.course === cid); 
-  const setAssignments = useState<any[]>(db.assignments);
+  const navigate = useNavigate();
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+
+const handleDelete = () => {
+  const result = window.confirm("Do you want to proceed?");
+  if (result) {
+    console.log("User clicked Yes");
+    return true;
+  } else {
+    console.log("User clicked No");
+    return false;
+  }
+};
   const isFaculty = currentUser?.role === "FACULTY";
   return (
-    <div id="wd-assignments">
-     {isFaculty && (
-       <AssignmentsControls 
-         assignmentName={assignmentName}
-         setAssignmentName={setAssignmentName}
-         addAssignment={() => {
-           dispatch(addAssignment({ name: assignmentName, course: cid }));
-           setAssignmentName("");
-         }}
-         cid={cid || ""} // Pass the actual cid value here
-       />
-     )}
-      
-    <br /><br />
-  
-    <ul id="wd-assignments-list" className="list-group rounded-0">
-      <li className="wd-assignment list-group-item p-0 mb-5 fs-5 border-gray">
-      
-        <div className="wd-title p-3 ps-2 bg-light d-flex justify-content-between align-items-center"> 
-          <div>
-            <BsGripVertical className="wd-assignments-title me-2 fs-3" />
-            ASSIGNMENTS
-          </div>
-          <AssignmentsHeaderButtons />
-        </div>
-
-        <ul className="wd-lesson list-group rounded-0">
-          {assignments.map((assignment) => (
-            <li key={assignment._id} className="wd-assignment-list-item list-group-item p-3 ps-1 d-flex justify-content-between align-items-center">
-              <div className="d-flex align-items-start flex-grow-1 align-items-center">
-                <BsGripVertical className="me-2 fs-3" />
-                <PiNotePencilBold className="me-2 fs-3" />
-                <div>
-                  <Link to={`/Kanbas/Courses/${cid}/Assignments/${assignment._id}`} className="wd-assignment-link text-decoration-none">
-                    {assignment.title}
-                  </Link>
-                  <div className="text-muted small mt-1">
-                    <span className="text-danger">Multiple Modules</span> |
-                    <span> <b>Available until</b> {assignment.availability}</span> |<br />
-                    <span> <b>Due</b> {assignment.due}</span> |
-                    <span> {assignment.points} pts</span>
+    <div id="wd-assignments">      
+      <AssignmentsControls />
+      <hr />
+      <div className="wd-assignments-list">
+        <ul className="list-group wd-margin-left" style={{ borderRadius: "0%" }}>
+          <li className="list-group-item list-group-item-secondary">
+            <div>
+              <BsGripVertical className="me-2" />
+              <b>Assignments</b>
+              <AssignmentsHeaderButtons />
+            </div>
+          </li>
+          <ul className="list-group" style={{ borderRadius: "0%" }}>
+            {assignmentList.map((assignment) => (
+              <li className='list-group-item'>
+                <div className='row'>
+                  <div className='col-auto' style={{ margin: "auto", display: "flex" }}>
+                    <BsGripVertical style={{ verticalAlign: "middle", marginRight: "10px" }} />
+                    <FaPencil />
+                  </div>
+                  <div className='col wd-fg-color-gray ps-0 ms-2'>
+                    <Link style={{ color: 'green', textDecoration: 'none' }} className="fw-bold ps-0" to={`/Kanbas/Courses/${courseId}/Assignments/${assignment._id}`}>
+                      {assignment.name}
+                    </Link>
+                    <br />
+                    {assignment.description} |
+                    <br /><b>Due</b> {assignment.dueDateTime.slice(0,16)} | {assignment.points} points
+                  </div>
+                  <div className="col-auto" style={{ margin: "auto", display: "flex" }}>
+                  <button className="btn m-0 pt-0 pb-0 me-1 btn-danger btn-sm"
+                  onClick={() => {handleDelete() ? dispatch(deleteAssignment(assignment._id)) : 
+                    navigate(`/Kanbas/Courses/${courseId}/Assignments`);
+                  }}>
+                  Delete</button>
+                    <FaCheckCircle
+                      style={{ color: "green" }} />
+                    <BsGripVertical style={{ verticalAlign: "middle" }} />
                   </div>
                 </div>
-              </div>
-              {isFaculty && (<AssignmentControlButtons AssignmentId={""} deleteAssignment={function (AssignmentId: string): void {
-                throw new Error("Function not implemented.");
-              } } editAssignment={function (AssignmentId: string): void {
-                throw new Error("Function not implemented.");
-              } } />)}
+              </li>
+            ))}
+          </ul>
 
-            </li>
-          ))}
         </ul>
-    </li>
-  </ul>
-</div>
+      </div>
+    </div >
+ 
 
 
 
   );
 }
-
+export default Assignments;

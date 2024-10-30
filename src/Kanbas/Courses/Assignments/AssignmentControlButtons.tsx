@@ -11,8 +11,8 @@ export default function AssignmentontrolButtons(
 ) {
   return (
     <div className="float-end">
-        <FaPencil onClick={() => editAssignment(AssignmentId)} className="text-primary me-3" />
-        <FaTrash className="text-danger me-2 mb-1" onClick={() => deleteAssignment(AssignmentId)}/>       
+        <FaPencil/>
+        <FaTrash />       
         <GreenCheckmark />
         <Plusmark />
         <IoEllipsisVertical className="fs-4" />
