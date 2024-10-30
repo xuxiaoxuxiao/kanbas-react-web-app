@@ -53,13 +53,12 @@ function Kanbas() {
               addNewCourse={addNewCourse}
               deleteCourse={deleteCourse}
               updateCourse={updateCourse}/>
-      
-              {/* addAssignment={addAssignment} */}
             </ProtectedRoute>
           }/>
           <Route path="Courses/:cid/*" element={<ProtectedRoute><Courses courses={courses} /></ProtectedRoute> } />
         </Routes>
       </div>
+
     </div>
     </Provider>
 

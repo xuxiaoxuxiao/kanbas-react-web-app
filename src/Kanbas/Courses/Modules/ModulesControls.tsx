@@ -2,14 +2,20 @@ import ModuleEditor from "./ModuleEditor";
 import { FaPlus } from "react-icons/fa6";
 import GreenCheckmark from "./GreenCheckmark";
 import Banmark from "./Banmark"
+import { useSelector } from "react-redux";
 export default function ModulesControls({ moduleName, setModuleName, addModule }:
-    { moduleName: string; setModuleName: (title: string) => void; addModule: () => void; }) {
+    { moduleName: string; setModuleName: (title: string) => void; addModule: () => void; }){
+        const { currentUser } = useSelector((state: any) => state.accountReducer);
+        const isFaculty = currentUser?.role === "FACULTY";
+
   return (
     <div id="wd-modules-controls" className="text-nowrap d-flex justify-content-end align-items-center">
 
         <button id="wd-collapse-all" className="btn btn-lg btn-secondary me-1">   
             Collapse All
         </button>  
+        {isFaculty &&
+        <div>
         <button id="wd-view-progress" className="btn btn-lg btn-secondary me-1">
             View Progress
         </button>
@@ -46,6 +52,7 @@ export default function ModulesControls({ moduleName, setModuleName, addModule }
             <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
             Module
         </button>
+        </div>}
 
         <ModuleEditor dialogTitle="Add Module" moduleName={moduleName}
                     setModuleName={setModuleName} addModule={addModule} />

@@ -16,23 +16,15 @@ export default function Modules() {
 
   const isFaculty = currentUser?.role === "FACULTY";
 
-  // console.log("Current User Role:", currentUser?.role);  // For debugging role
-  // console.log("Current User:", currentUser);  // Logs the entire user object
-  // console.log("Is Faculty:", isFaculty);      // Logs true if user is FACULTY, otherwise false
-
   return (
     <div>  
-      {isFaculty && (
-        <ModulesControls 
-          moduleName={moduleName} 
-          setModuleName={setModuleName} 
-          addModule={() => {
-            dispatch(addModule({ name: moduleName, course: cid }));
-            setModuleName("");
-          }}
-        />
-      )}
-      
+      <ModulesControls 
+        moduleName={moduleName} 
+        setModuleName={setModuleName} 
+        addModule={() => {
+          dispatch(addModule({ name: moduleName, course: cid }));
+          setModuleName("");
+        }}/>
       <br /><br /><br /><br />
       <ul id="wd-modules" className="list-group rounded-0">
         {modules

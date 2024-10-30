@@ -39,8 +39,9 @@ const handleDelete = () => {
   const isFaculty = currentUser?.role === "FACULTY";
   return (
     <div id="wd-assignments">      
-      {isFaculty && <AssignmentsControls />}
-      <br /><br />
+       <AssignmentsControls />
+      <hr />
+      <br />
       
       <div className="wd-assignments-list">
         <ul id="wd-assignments-list" className="list-group rounded-0">
@@ -60,26 +61,37 @@ const handleDelete = () => {
                     <BsGripVertical className="me-2 fs-3" />
                     <PiNotePencilBold className="me-2 fs-3" />       
                   <div>
-                    <Link className="wd-assignment-link text-decoration-none" to={`/Kanbas/Courses/${courseId}/Assignments/${assignment._id}`}>
-                      {assignment.name}
-                    </Link>
+                    {isFaculty ? (
+                      <Link
+                        className="wd-assignment-link"
+                        to={`/Kanbas/Courses/${courseId}/Assignments/${assignment._id}`}
+                      >
+                        {assignment.name}
+                      </Link>
+                    ) : (
+                      <span className="wd-assignment-name">{assignment.name}</span>
+                    )}  
                     <br />
                     <div className="text-muted small mt-1">
-                    <span>{assignment.description} </span> |
-                    <span className="text-danger"> Multiple Modules</span> |  
-                    <span> <b>Available until</b> {assignment.availableUntilDate.slice(0,10)}</span> |
-                    <br /><b>Due</b> {assignment.dueDateTime.slice(0,10)} |
-                    <span>{assignment.points} pts </span>
+                      <span>{assignment.description} </span> |
+                      <span className="text-danger"> Multiple Modules</span> |  
+                      <span> <b>Available until</b> {assignment.availableUntilDate.slice(0,10)}</span> |
+                      <br /><b>Due</b> {assignment.dueDateTime.slice(0,10)} |
+                      <span>{assignment.points} pts </span>
                     </div>
                   </div>
                   
                   </div>
-                  <div className="btn m-0 pt-0 pb-0 me-1 btn-danger btn-sm"
-                    onClick={() => {handleDelete() ? dispatch(deleteAssignment(assignment._id)) : 
-                      navigate(`/Kanbas/Courses/${courseId}/Assignments`);
-                    }}>
-                     < FaTrash />
-                   </div>    
+                  {isFaculty && 
+                    <div className="btn m-0 pt-0 pb-0 me-1 btn-danger btn-sm"
+                      onClick={() => {handleDelete() ? dispatch(deleteAssignment(assignment._id)) : 
+                        navigate(`/Kanbas/Courses/${courseId}/Assignments`);
+                      }}>
+                      < FaTrash />
+                    </div> 
+                   }
+
+
               </li>
             ))}
           </ul>
