@@ -13,9 +13,8 @@ import AssignmentsHeaderButtons from "./AssignmentsHeaderButtons";
 import AssignmentControlButtons from "./AssignmentControlButtons";
 import { KanbasState } from "../../store";
 import { BsPlus } from "react-icons/bs";
-import { FaCheckCircle, FaCircle, FaSearch } from "react-icons/fa";
+import { FaCheckCircle, FaTrash } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
-
 
 
 function Assignments() {
@@ -40,48 +39,54 @@ const handleDelete = () => {
   const isFaculty = currentUser?.role === "FACULTY";
   return (
     <div id="wd-assignments">      
-      <AssignmentsControls />
-      <hr />
+      {isFaculty && <AssignmentsControls />}
+      <br /><br />
+      
       <div className="wd-assignments-list">
-        <ul className="list-group wd-margin-left" style={{ borderRadius: "0%" }}>
-          <li className="list-group-item list-group-item-secondary">
-            <div>
-              <BsGripVertical className="me-2" />
-              <b>Assignments</b>
+        <ul id="wd-assignments-list" className="list-group rounded-0">
+          <li className="wd-assignment list-group-item p-0 mb-5 fs-5 border-gray">   
+            <div className="wd-title p-3 ps-2 bg-light d-flex justify-content-between align-items-center">
+              <div>
+                <BsGripVertical className="wd-assignments-title me-2 fs-3" />
+                ASSIGNMENTS
+              </div>
               <AssignmentsHeaderButtons />
             </div>
-          </li>
-          <ul className="list-group" style={{ borderRadius: "0%" }}>
+          
+          <ul className="wd-lesson list-group rounded-0">
             {assignmentList.map((assignment) => (
-              <li className='list-group-item'>
-                <div className='row'>
-                  <div className='col-auto' style={{ margin: "auto", display: "flex" }}>
-                    <BsGripVertical style={{ verticalAlign: "middle", marginRight: "10px" }} />
-                    <FaPencil />
-                  </div>
-                  <div className='col wd-fg-color-gray ps-0 ms-2'>
-                    <Link style={{ color: 'green', textDecoration: 'none' }} className="fw-bold ps-0" to={`/Kanbas/Courses/${courseId}/Assignments/${assignment._id}`}>
+              <li className="wd-assignment-list-item list-group-item p-3 ps-1 d-flex justify-content-between align-items-center">
+                <div className="d-flex align-items-start flex-grow-1 align-items-center">      
+                    <BsGripVertical className="me-2 fs-3" />
+                    <PiNotePencilBold className="me-2 fs-3" />       
+                  <div>
+                    <Link className="wd-assignment-link text-decoration-none" to={`/Kanbas/Courses/${courseId}/Assignments/${assignment._id}`}>
                       {assignment.name}
                     </Link>
                     <br />
-                    {assignment.description} |
-                    <br /><b>Due</b> {assignment.dueDateTime.slice(0,16)} | {assignment.points} points
+                    <div className="text-muted small mt-1">
+                    <span>{assignment.description} </span> |
+                    <span className="text-danger"> Multiple Modules</span> |  
+                    <span> <b>Available until</b> {assignment.availableUntilDate.slice(0,10)}</span> |
+                    <br /><b>Due</b> {assignment.dueDateTime.slice(0,10)} |
+                    <span>{assignment.points} pts </span>
+                    </div>
                   </div>
+
+
                   <div className="col-auto" style={{ margin: "auto", display: "flex" }}>
-                  <button className="btn m-0 pt-0 pb-0 me-1 btn-danger btn-sm"
+                  <div className="btn m-0 pt-0 pb-0 me-1 btn-danger btn-sm"
                   onClick={() => {handleDelete() ? dispatch(deleteAssignment(assignment._id)) : 
                     navigate(`/Kanbas/Courses/${courseId}/Assignments`);
                   }}>
-                  Delete</button>
-                    <FaCheckCircle
-                      style={{ color: "green" }} />
-                    <BsGripVertical style={{ verticalAlign: "middle" }} />
+                   <FaTrash /></div>
+                   
                   </div>
                 </div>
               </li>
             ))}
           </ul>
-
+          </li>
         </ul>
       </div>
     </div >
