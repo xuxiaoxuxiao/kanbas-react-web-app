@@ -73,7 +73,7 @@ const handleDelete = () => {
                     )}  
                     <br />
                     <div className="text-muted small mt-1">
-                      <span>{assignment.description} </span> |
+                      {/* <span>{assignment.description} </span> | */}
                       <span className="text-danger"> Multiple Modules</span> |  
                       <span> <b>Available until</b> {assignment.availableUntilDate.slice(0,10)}</span> |
                       <br /><b>Due</b> {assignment.dueDateTime.slice(0,10)} |
