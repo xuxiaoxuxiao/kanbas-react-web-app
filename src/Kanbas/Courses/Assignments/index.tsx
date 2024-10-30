@@ -72,17 +72,14 @@ const handleDelete = () => {
                     <span>{assignment.points} pts </span>
                     </div>
                   </div>
-
-
-                  <div className="col-auto" style={{ margin: "auto", display: "flex" }}>
-                  <div className="btn m-0 pt-0 pb-0 me-1 btn-danger btn-sm"
-                  onClick={() => {handleDelete() ? dispatch(deleteAssignment(assignment._id)) : 
-                    navigate(`/Kanbas/Courses/${courseId}/Assignments`);
-                  }}>
-                   <FaTrash /></div>
-                   
+                  
                   </div>
-                </div>
+                  <div className="btn m-0 pt-0 pb-0 me-1 btn-danger btn-sm"
+                    onClick={() => {handleDelete() ? dispatch(deleteAssignment(assignment._id)) : 
+                      navigate(`/Kanbas/Courses/${courseId}/Assignments`);
+                    }}>
+                     < FaTrash />
+                   </div>    
               </li>
             ))}
           </ul>
