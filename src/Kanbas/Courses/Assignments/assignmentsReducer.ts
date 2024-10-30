@@ -8,7 +8,7 @@ const initialState = {
         name: "New Assignment",
         description: "New Description",
         points: 100,
-        course: "hi",
+        course: "",
         _id: "",
         dueDateTime: new Date().toISOString().slice(0, 16),
         availableFromDate: new Date().toISOString().slice(0, 16),

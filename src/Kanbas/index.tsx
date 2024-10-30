@@ -35,6 +35,10 @@ function Kanbas() {
       })
     );
   };
+  const addCourse = (newCourse:any) => {
+    setCourses([...courses, newCourse]);
+    
+  };
   return (
     <Provider store={store}>
 
@@ -52,7 +56,8 @@ function Kanbas() {
               setCourse={setCourse}
               addNewCourse={addNewCourse}
               deleteCourse={deleteCourse}
-              updateCourse={updateCourse}/>
+              updateCourse={updateCourse}
+              addCourse={addCourse}/>
             </ProtectedRoute>
           }/>
           <Route path="Courses/:cid/*" element={<ProtectedRoute><Courses courses={courses} /></ProtectedRoute> } />
