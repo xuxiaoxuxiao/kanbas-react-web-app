@@ -268,33 +268,41 @@ function AssignmentEditor() {
               </div>
             
           </div>
-          <div className="row g-0 text-end" style={{ paddingBottom: "15px" }}>
-              <div className="col-6 col-md-4" style={{ paddingTop: "5px", paddingRight: "15px" }}>
-                  Submission Type
+          {/* Submission Type Section */}
+          <div className="row mb-3">
+          <h6 className="col-md-4 col-form-label">Submission Type</h6>
+          <div className="col-md-8">
+            <div className="border p-3 mb-3" style={{ borderRadius: '5px' }}>
+              <select id="wd-submission-type" className="form-select mb-3">
+                <option value="OnPaper">On Paper</option>
+                <option selected value="Online">Online</option>
+              </select>
+
+              <label className="form-label"><b>Online Entry Options</b></label>
+              <div className="form-check">
+                <input type="checkbox" className="form-check-input" id="wd-text-entry" />
+                <label className="form-check-label" htmlFor="wd-text-entry">Text Entry</label>
               </div>
-              <div className="col-sm-6 col-md-8 w-50" style={{ textAlign: "start" }}>
-                  <div
-                      className="wd-group"
-                      style={{ border: "0.5px solid black", borderRadius: "1%", padding: "10px" }}
-                  >
-                      <select className="form-control">
-                          <option>Online</option>
-                          <option>In-Person</option>
-                      </select>
-                      <br />
-                      <b>Online Entry Options</b>
-                      <br />
-                      <input type="checkbox" checked id="textEntry" />
-                      <label>Text Entry</label> <br />
-                      <input type="checkbox" checked /> Website URL <br />
-                      <label><input type="checkbox" checked /> Media recordings </label><br />
-                      <input type="checkbox" /> Student Annotation <br />
-                      <input type="checkbox" checked /> File Uploads <br />
-                      <input type="checkbox" /> Restrict Upload File Types <br />
-                      <br />
-                  </div>
+              <div className="form-check">
+                <input type="checkbox" className="form-check-input" id="wd-website-url" defaultChecked/>
+                <label className="form-check-label" htmlFor="wd-website-url">Website URL</label>
               </div>
+              <div className="form-check">
+                <input type="checkbox" className="form-check-input" id="wd-media-recordings" />
+                <label className="form-check-label" htmlFor="wd-media-recordings">Media Recordings</label>
+              </div>
+              <div className="form-check">
+                <input type="checkbox" className="form-check-input" id="wd-student-annotation" />
+                <label className="form-check-label" htmlFor="wd-student-annotation">Student Annotation</label>
+              </div>
+              <div className="form-check">
+                <input type="checkbox" className="form-check-input" id="wd-file-upload" />
+                <label className="form-check-label" htmlFor="wd-file-upload">File Uploads</label>
+              </div>
+            </div>
           </div>
+        </div>
+
           <div className="row g-0 text-end">
               <div className="col-6 col-md-4" style={{ paddingTop: "5px", paddingRight: "15px" }}>
                   Assign

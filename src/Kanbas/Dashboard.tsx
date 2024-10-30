@@ -13,6 +13,7 @@ export default function Dashboard({
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const { enrollments } = db;
   const isFaculty = currentUser?.role === "FACULTY";
+  const isStudent = currentUser?.role === "STUDENT";
 
   return (
     <div id="wd-dashboard">
