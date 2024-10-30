@@ -132,7 +132,7 @@ export default function AssignmentsControls({
     };
     
     addAssignment(newAssignmentData);
-    navigate(`/Kanbas/Courses/${cid}/Assignments`); // Navigate back to Assignments after adding
+    navigate(`/Kanbas/Courses/${cid}/Assignments/Editor`); // Navigate back to Assignments after adding
   };
 
   return (
@@ -156,7 +156,7 @@ export default function AssignmentsControls({
         <button 
           id="wd-add-assignment-btn"
           className="btn wd-add-assignment btn-danger"
-          onClick={() => navigate(`/Kanbas/Courses/${cid}/AssignmentEditor`)}  // Updated to handle add assignment logic
+          onClick={handleAddAssignment}  // Updated to handle add assignment logic
         >
           + Assignment
         </button>
