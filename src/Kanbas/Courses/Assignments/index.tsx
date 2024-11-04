@@ -61,16 +61,17 @@ const handleDelete = () => {
                     <BsGripVertical className="me-2 fs-3" />
                     <PiNotePencilBold className="me-2 fs-3" />       
                   <div>
-                    {isFaculty ? (
+                  
                       <Link
                         className="wd-assignment-link"
                         to={`/Kanbas/Courses/${courseId}/Assignments/${assignment._id}`}
+                        state = {{readOnly : !isFaculty}}
                       >
                         {assignment.name}
                       </Link>
-                    ) : (
-                      <span className="wd-assignment-name">{assignment.name}</span>
-                    )}  
+                    
+                      {/* <span className="wd-assignment-name">{assignment.name}</span> */}
+                      
                     <br />
                     <div className="text-muted small mt-1">
                       {/* <span>{assignment.description} </span> | */}

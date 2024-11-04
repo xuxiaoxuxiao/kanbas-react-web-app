@@ -1,6 +1,7 @@
 import { RxCross2 } from "react-icons/rx";
 import React, { useEffect } from "react";
 import * as db from "../../Database";
+import { useLocation } from "react-router-dom";
 
 import {
     addAssignment,
@@ -47,9 +48,12 @@ function AssignmentEditor() {
       dispatch(cancelAssignmentUpdate(assignment))
       navigate(`/Kanbas/Courses/${courseId}/Assignments`);
   };
+  const location =useLocation();
+  const readOnly = location.state?.readOnly || false;
   return (
       <div>
           <h2>Assignment Name</h2>
+          
           <input value={assignment?.name}
               onChange={(e: { target: { value: any; }; }) => dispatch(setAssignment({ ...assignment, name: e.target.value }))}
               className="form-control mb-2" />
@@ -188,6 +192,7 @@ function AssignmentEditor() {
           <br />
           <hr />
           <div className="d-flex justify-content-end">
+            {!readOnly &&
               <div className="d-flex justify-content-between" style={{ paddingTop: "15px" }}>
                  
                   <span>
@@ -200,7 +205,8 @@ function AssignmentEditor() {
                           Save
                       </button>
                   </span>
-              </div>
+              </div>}
+              <br />< br />
 
           </div>
       </div>
