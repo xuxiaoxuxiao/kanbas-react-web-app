@@ -35,6 +35,35 @@ export default function Dashboard({
   <div id="wd-dashboard">
     <h1>Dashboard</h1>
     <hr />
+    {isFaculty && (    
+        <>
+        <br />
+          <h5>
+            New Course
+            <button className="btn btn-primary float-end"
+              id="wd-add-new-course-click"
+              onClick={addNewCourse}> Add 
+            </button>
+            <button className="btn btn-warning float-end me-2"
+              onClick={updateCourse} id="wd-update-course-click">
+              Update 
+            </button>
+          </h5>
+          <hr />
+          <input 
+            value={course.name} 
+            className="form-control mb-2" 
+            onChange={(e) => setCourse({ ...course, name: e.target.value })} 
+          />
+          <textarea 
+            value={course.description} 
+            className="form-control"
+            onChange={(e) => setCourse({ ...course, description: e.target.value })}
+          />
+          <br />
+        </>
+      )}
+
     {/* Student Version */}
     {isStudent && (<>
       <button className="btn btn-primary float-end" onClick={toggleEnrollments}>
