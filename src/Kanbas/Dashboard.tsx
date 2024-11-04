@@ -33,7 +33,8 @@ export default function Dashboard({
   return (
   
   <div id="wd-dashboard">
-    <h1>Dashboard</h1>
+    <h1>Dashboard</h1><hr />
+    <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2>
     <hr />
     {isFaculty && (    
         <>
