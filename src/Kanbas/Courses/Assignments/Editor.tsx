@@ -105,9 +105,9 @@ function AssignmentEditor() {
           </div>
           {/* Submission Type Section */}
           <div className="row mb-3">
-          <h6 className="col-md-4 col-form-label">Submission Type</h6>
-          <div className="col-md-8">
-            <div className="border p-3 mb-3" style={{ borderRadius: '5px' }}>
+          <h6 className="col-md-4 col-form-label text-end">Submission Type</h6>
+        
+            <div className="border col-sm-6 col-md-8 w-50 p-3 mb-3" style={{ borderRadius: '5px' }}>
               <select id="wd-submission-type" className="form-select mb-3">
                 <option value="OnPaper">On Paper</option>
                 <option selected value="Online">Online</option>
@@ -135,17 +135,17 @@ function AssignmentEditor() {
                 <label className="form-check-label" htmlFor="wd-file-upload">File Uploads</label>
               </div>
             </div>
-          </div>
+       
         </div>
 
           <div className="row g-0 text-end">
               <div className="col-6 col-md-4" style={{ paddingTop: "5px", paddingRight: "15px" }}>
                   Assign
               </div>
-              <div className="col-sm-6 col-md-8 w-50" style={{ textAlign: "start" }}>
+              <div className="col-sm-6 col-md-8 w-50 border p-3 mb-3 rounded" style={{ textAlign: "start" }}>
                   <div
                       className="wd-group"
-                      style={{ border: "0.5px solid black", borderRadius: "1%", padding: "10px" }}
+                      style={{borderRadius: "1%", padding: "10px" }}
                   >
                       <b>Assign to</b>
                       <input
@@ -198,7 +198,7 @@ function AssignmentEditor() {
                   <span>
                       <Link to={`/Kanbas/Courses/${courseId}/Assignments`}
                           onClick={() => dispatch(cancelAssignmentUpdate(assignment))}
-                          className="btn" style={{ height: "fit-content", backgroundColor: "#E0E0E0" }}>
+                          className="btn me-4" style={{ height: "fit-content", backgroundColor: "#E0E0E0" }}>
                           Cancel
                       </Link>
                       <button onClick={handleSave} className="btn btn-danger" style={{ marginRight: "5px" }}>
