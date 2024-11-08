@@ -38,14 +38,14 @@ export default function WorkingWithObjects() {
           setAssignment({ ...assignment, score: e.target.valueAsNumber})}/>
       <br />
       <div>
-      <b>Assignment Completed</b>
+     
       <input
         type="checkbox"
         className="form-check-input ms-3"
         id="wd-assignment-completed"
         checked={assignment.completed}
         onChange={(e) => setAssignment({ ...assignment, completed: e.target.checked })}
-      />
+      /> <label>Assignment Completed</label>
       <a
         id="wd-update-assignment-completed"
         className="btn btn-primary float-end"
