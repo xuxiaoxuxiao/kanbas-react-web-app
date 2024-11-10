@@ -1,41 +1,33 @@
-// import { Link } from "react-router-dom";
-// export default function Profile() {
-//   return (
-//     <div id="wd-profile-screen">
-//       <h3>Profile</h3>
-//       <input id="wd-username" className="form-control mb-0" value="alice" placeholder="username" /><br/>
-//       <input id="wd-password" className="form-control mb-0" value="123" placeholder="password"
-//             /><br/>
-//       <input id="wd-firstname" className="form-control mb-0" value="Alice" placeholder="First Name" /><br/>
-//       <input id="wd-lastname" className="form-control mb-0" value="Wonderland" placeholder="Last Name" /><br/>
-//       <input id="wd-dob" className="form-control mb-1" value="2000-01-01" type="date" /><br/>
-//       <input id="wd-email" className="form-control mb-0" value="alice@wonderland" type="email" /><br/>
-//       <select id="wd-role"  className="form-control mb-0" >
-//         <option className="form-control mb-2" value="USER">User</option>
-//         <option className="form-control mb-2" value="ADMIN">Admin</option>
-//         <option className="form-control mb-2" value="FACULTY">Faculty</option>
-//         <option className="form-control mb-2" value="STUDENT">Student</option>
-//       </select><br/>
-//       <Link to="/Kanbas/Account/Signin"  className="btn btn-danger w-100">Sign out</Link>
-//     </div>
-// );}
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentUser } from "./reducer";
+import * as client from "./client";
 export default function Profile() {
   const [profile, setProfile] = useState<any>({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const updateProfile = async () => {
+    const updatedProfile = await client.updateUser(profile);
+    dispatch(setCurrentUser(updatedProfile));
+  };
+
   const fetchProfile = () => {
     if (!currentUser) return navigate("/Kanbas/Account/Signin");
     setProfile(currentUser);
   };
-  const signout = () => {
+  // const signout = () => {
+  //   dispatch(setCurrentUser(null));
+  //   navigate("/Kanbas/Account/Signin");
+  // };
+
+  const signout = async () => {
+    await client.signout();
     dispatch(setCurrentUser(null));
     navigate("/Kanbas/Account/Signin");
   };
+
   useEffect(() => { fetchProfile(); }, []);
   return (
     <div className="wd-profile-screen">
@@ -55,13 +47,14 @@ export default function Profile() {
           <input defaultValue={profile.email} id="wd-email" className="form-control mb-2"
                  onChange={ (e) => setProfile({ ...profile, email: e.target.value })}/>
                     <select onChange={(e) => setProfile({ ...profile, role:  e.target.value })}
-                 className="form-control mb-2" id="wd-role">
-            <option value="USER">User</option>            <option value="ADMIN">Admin</option>
-            <option value="FACULTY">Faculty</option>      <option value="STUDENT">Student</option>
-          </select>
-          <button onClick={signout} className="btn btn-danger w-100 mb-2" id="wd-signout-btn">
-            Sign out
-          </button>
+                    className="form-control mb-2" id="wd-role">
+                      <option value="USER">User</option> 
+                      <option value="ADMIN">Admin</option>
+                      <option value="FACULTY">Faculty</option>      
+                      <option value="STUDENT">Student</option>
+                  </select>
+            <button onClick={updateProfile} className="btn btn-primary w-100 mb-2"> Update </button>
+            <button onClick={signout} className="btn btn-danger w-100 mb-2" id="wd-signout-btn"> Sign out </button>
         </div>
       )}
 </div>);}

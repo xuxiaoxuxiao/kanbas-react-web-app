@@ -10,6 +10,7 @@ import Labs from "../Labs";
 import * as db from "./Database";
 import { useState } from "react";
 import ProtectedRoute from "./Account/ProtectedRoute";
+import Session from "./Account/Session";
 ;
 
 function Kanbas() {
@@ -40,8 +41,9 @@ function Kanbas() {
     
   };
   return (
+   
     <Provider store={store}>
-
+    <Session>
     <div id="wd-kanbas">
       <KanbasNavigation />
       <div className="wd-main-content-offset p-3">
@@ -65,7 +67,9 @@ function Kanbas() {
       </div>
 
     </div>
+    </Session>
     </Provider>
+  
 
   );}
   export default Kanbas;
