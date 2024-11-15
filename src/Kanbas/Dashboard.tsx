@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import * as db from "./Database";
+
 
 export default function Dashboard({
   courses, course, setCourse, addNewCourse, deleteCourse, updateCourse, addCourse
@@ -12,19 +12,19 @@ export default function Dashboard({
   addCourse: (newCourse: any) => void;
 }) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const [enrollments, setEnrollments] = useState<any[]>(db.enrollments);
+  //const [enrollments, setEnrollments] = useState<any[]>(db.enrollments);
   
   const isStudent = currentUser?.role === "STUDENT";
   const isFaculty = currentUser?.role === "FACULTY";
-  const toggleEnrollment = (courseId: string) => {
-    if (enrollments.some(enrollment => enrollment.user === currentUser._id && enrollment.course === courseId)) {
-      // Unenroll if already enrolled
-      setEnrollments(enrollments.filter(enrollment => !(enrollment.user === currentUser._id && enrollment.course === courseId)));
-    } else {
-      // Enroll if not enrolled
-      setEnrollments([...enrollments, { user: currentUser._id, course: courseId }]);
-    }
-  };
+  // const toggleEnrollment = (courseId: string) => {
+  //   if (enrollments.some(enrollment => enrollment.user === currentUser._id && enrollment.course === courseId)) {
+  //     // Unenroll if already enrolled
+  //     setEnrollments(enrollments.filter(enrollment => !(enrollment.user === currentUser._id && enrollment.course === courseId)));
+  //   } else {
+  //     // Enroll if not enrolled
+  //     setEnrollments([...enrollments, { user: currentUser._id, course: courseId }]);
+  //   }
+  // };
   const [isEnrollmentsVisible, setEnrollmentsVisible] = useState(false);
   const toggleEnrollments = () => {
     setEnrollmentsVisible((prev) => !prev);
@@ -36,8 +36,9 @@ export default function Dashboard({
     <h1>Dashboard</h1><hr />
     <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2>
     <hr />
-    {isFaculty && (    
-        <>
+    
+    {isFaculty && (  
+      <>
         <br />
           <h5>
             New Course
@@ -62,11 +63,11 @@ export default function Dashboard({
             onChange={(e) => setCourse({ ...course, description: e.target.value })}
           />
           <br />
-        </>
-      )}
+     </>)}
+      
 
     {/* Student Version */}
-    {isStudent && (<>
+    {/* {isStudent && (<>
       <button className="btn btn-primary float-end" onClick={toggleEnrollments}>
         Enrollments
       </button> 
@@ -118,19 +119,13 @@ export default function Dashboard({
           </div>
         ))}
       </div>
-    )} </>)}
+    )} </>)} */}
     
     <div id="wd-dashboard-courses" className="row">
         <h2>Enrolled Courses</h2>
         <div className="row row-cols-1 row-cols-md-5 g-4">
          
           {courses
-            .filter((course) =>
-              enrollments.some(
-                (enrollment) =>
-                  enrollment.user === currentUser._id &&
-                  enrollment.course === course._id
-              ))
             .map((course) => (
               <div className="wd-dashboard-course col" style={{ width: "300px" }} key={course._id}>
                 <div className="card rounded-3 overflow-hidden">
