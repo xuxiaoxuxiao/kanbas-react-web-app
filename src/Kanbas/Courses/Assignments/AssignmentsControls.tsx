@@ -2,11 +2,12 @@ import { FaSearch } from "react-icons/fa";
 import { IoEllipsisVertical } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-
+import {  useParams } from "react-router";
 export default function AssignmentsControls() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const isFaculty = currentUser?.role === "FACULTY";
-
+  const navigate = useNavigate();
+  const { courseId } = useParams();
   return (
     <div className="d-flex justify-content-between mb-4">
       
@@ -28,10 +29,11 @@ export default function AssignmentsControls() {
             + Group
           </button>
           <div className="wd-button float-end">
-                <Link to={"../Assignments/Editor"} id="wd-add-assignment-btn"
+                <button  onClick={() => navigate(`/Kanbas/Courses/${courseId}/Assignments/new`)}
               className="btn wd-add-assignment btn-danger me-2">
+
                   + Assignment
-                </Link>
+                </button>
                 <button className="btn wd-add-assignment-group btn-secondary "> <IoEllipsisVertical className="fs-4" /> </button>
           </div>
           

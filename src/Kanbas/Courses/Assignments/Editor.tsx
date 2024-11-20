@@ -1,65 +1,80 @@
 import { RxCross2 } from "react-icons/rx";
-import React, { useEffect } from "react";
-import * as db from "../../Database";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 
-import {
-    addAssignment,
-    deleteAssignment,
-    updateAssignment,
-    setAssignment,
-    cancelAssignmentUpdate
-} from "./assignmentsReducer";
+import { useLocation } from "react-router-dom";
+import * as coursesClient from "../client";
+import * as assignmentsClient from "./client";
+import {addAssignment, updateAssignment,} from "./Reducer";
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { KanbasState } from "../../store";
+//import { KanbasState } from "../../store";
 
 function AssignmentEditor() {
-  const { assignmentId, courseId } = useParams();
+  const { courseId,assignmentId } = useParams();
+  console.log("assignmentId:", assignmentId);
+  console.log("courseId:", courseId);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isNewAssignment = !assignmentId || assignmentId.trim() === '';
-  const assignmentList = useSelector((state: KanbasState) =>
-      state.assignmentsReducer.assignments);
-  const assignment = useSelector((state: KanbasState) =>
-      state.assignmentsReducer.assignment);
-  useEffect(() => {
-      const assignmentData = assignmentList.find(a => a._id === assignmentId);
-      if (assignmentData) {
-          dispatch(setAssignment(assignmentData));
-          console.log("Hello");
-      } else {
-          dispatch(cancelAssignmentUpdate(assignment));
-      }
-  }, [dispatch, assignmentId]);
+  //const { assignments } = useSelector((state: any) => state.assignmentReducer);
+  const { assignments } = useSelector((state: any) => state.assignmentReducer || { assignments: [] });
+
+  const existingAssignment = assignments.find(
+    (assignment: any) => assignment._id === assignmentId 
+  );
+
+  // const existingAssignment = useSelector((state: any) => state.assignmentReducer.assignments.find(
+  //     (assignment: { _id: string | undefined; }) => assignment._id === assignmentId
+  //   )
+  // );
+  const [assignment, setAssignment] = useState(
+    existingAssignment || {
+      title: "",
+      description: "",
+      points: 100,
+      dueDate: "",
+      availableFrom: "",
+      availableUntil: "",
+      course: courseId,
+    }
+  );
+
+  console.log("assignmentId:", assignmentId);
+  console.log("existingAssignment:", existingAssignment);
   const handleSave = () => {
-      if (isNewAssignment) {
-          const newAssignment = { ...assignment, _id: new Date().getTime().toString(), course: courseId };
-          console.log(newAssignment);
-          dispatch(updateAssignment(newAssignment));
-          dispatch(addAssignment(newAssignment));
-      } else {
-          dispatch(updateAssignment(assignment));
-      }
-      navigate(`/Kanbas/Courses/${courseId}/Assignments`);
+    if (existingAssignment) {
+      saveAssignment(assignment);
+    } else {
+      createAssignment({ ...assignment, _id: new Date().getTime().toString() });
+    }
+    navigate(`/Kanbas/Courses/${courseId}/Assignments`);
   };
 
-  const handleCancel = () => {
-      dispatch(cancelAssignmentUpdate(assignment))
-      navigate(`/Kanbas/Courses/${courseId}/Assignments`);
+  const createAssignment = async (assignment: any) => {
+    const newAssignment = await coursesClient.createAssignmentForCourse(
+      courseId as string,
+      assignment
+    );
+    dispatch(addAssignment(newAssignment));
   };
+  const saveAssignment = async (assignment: any) => {
+    await assignmentsClient.updateAssignment(assignment);
+    dispatch(updateAssignment(assignment));
+  };
+
   const location =useLocation();
   const readOnly = location.state?.readOnly || false;
+
   return (
+    
       <div>
           <h2>Assignment Name</h2>
           
-          <input value={assignment?.name}
-              onChange={(e: { target: { value: any; }; }) => dispatch(setAssignment({ ...assignment, name: e.target.value }))}
+          <input value={assignment.title}
+              onChange={(e) =>setAssignment({ ...assignment, title: e.target.value })}
               className="form-control mb-2" />
           <br />
-          <textarea value={assignment?.description} className="form-control" cols={50} rows={5}
-              onChange={(e) => dispatch(setAssignment({ ...assignment, description: e.target.value }))}></textarea>
+          <textarea value={assignment.description} className="form-control" cols={50} rows={5}
+             onChange={(e) =>setAssignment({ ...assignment, description: e.target.value })}></textarea>
           <br />
           <div className="row g-0 text-end" style={{ paddingBottom: "15px" }}>
               <div className="col-6 col-md-4" style={{ paddingTop: "5px", paddingRight: "15px" }}>
@@ -71,8 +86,10 @@ function AssignmentEditor() {
                       type="number"
                       placeholder="Points"
                       aria-label="default input example"
-                      value={assignment?.points}
-                      onChange={(e) => dispatch(setAssignment({ ...assignment, points: e.target.value }))}
+                      value={assignment.points}
+                      onChange={(e) =>
+                        setAssignment({ ...assignment, points: +e.target.value })
+                      }
                   />
               </div>
           </div>
@@ -157,8 +174,13 @@ function AssignmentEditor() {
                       />
                       <br />
                       <b>Due</b>
-                      <input className="form-control" type="datetime-local" value={assignment?.dueDateTime}
-                          onChange={(e) => dispatch(setAssignment({ ...assignment, dueDateTime: e.target.value }))} />
+                      <input className="form-control" type="datetime-local" value={assignment.dueDate}
+                         onChange={(e) =>
+                          setAssignment({
+                            ...assignment,
+                            dueDate: e.target.value,
+                          })
+                        }/>
 
                       <br />
                     <div className="row">
@@ -169,8 +191,13 @@ function AssignmentEditor() {
                         <input 
                             type="datetime-local" 
                             className="form-control"
-                            value={assignment?.availableFromDate || ''}
-                            onChange={(e) => dispatch(setAssignment({ ...assignment, availableFromDate: e.target.value }))}
+                            value={assignment.availableFrom}
+                            onChange={(e) =>
+                              setAssignment({
+                                ...assignment,
+                                availableFrom: e.target.value,
+                              })
+                            }
                         />
                         </div>
 
@@ -181,8 +208,13 @@ function AssignmentEditor() {
                         <input 
                             type="datetime-local" 
                             className="form-control"
-                            value={assignment?.availableUntilDate || ''}
-                            onChange={(e) => dispatch(setAssignment({ ...assignment, availableUntilDate: e.target.value }))}
+                            value={assignment.availableUntil}
+                            onChange={(e) =>
+                              setAssignment({
+                                ...assignment,
+                                availableUntil: e.target.value,
+                              })
+                            }
                         />
                         </div>
                     </div>
@@ -197,11 +229,12 @@ function AssignmentEditor() {
                  
                   <span>
                       <Link to={`/Kanbas/Courses/${courseId}/Assignments`}
-                          onClick={() => dispatch(cancelAssignmentUpdate(assignment))}
+                          
                           className="btn me-4" style={{ height: "fit-content", backgroundColor: "#E0E0E0" }}>
                           Cancel
+                         
                       </Link>
-                      <button onClick={handleSave} className="btn btn-danger" style={{ marginRight: "5px" }}>
+                        <button onClick={handleSave} className="btn btn-danger" style={{ marginRight: "5px" }}>
                           Save
                       </button>
                   </span>

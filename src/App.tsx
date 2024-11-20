@@ -4,7 +4,7 @@ import Kanbas from "./Kanbas";
 import { HashRouter,Route, Routes, Navigate } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./Kanbas/store";
-export default function App() {
+function App() {
   return (
     <HashRouter>
       <Provider store={store}>
@@ -20,4 +20,4 @@ export default function App() {
 
   );
 }
-//export default App;
+export default App;
