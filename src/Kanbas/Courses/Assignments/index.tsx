@@ -1,22 +1,24 @@
 import { BsGripVertical } from "react-icons/bs";
 import { PiNotePencilBold } from "react-icons/pi";
 import { useNavigate, useParams } from "react-router";
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AssignmentsControls from "./AssignmentsControls";
-import { addAssignment, deleteAssignment,setAssignments } from "./Reducer";
+import { deleteAssignment,setAssignments } from "./Reducer";
 import AssignmentsHeaderButtons from "./AssignmentsHeaderButtons";
 
-import { FaCheckCircle, FaTrash } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
 import * as coursesClient from "../client";
 import * as assignmentsClient from "./client";
 
 
 function Assignments() {
-  const { courseId } = useParams();
+  const { cid } = useParams();
   const { assignments } = useSelector((state: any) => state.assignments);
   const { currentUser } = useSelector((state: any) => state.accountReducer);
+  
+  console.log("cid:", cid);
+
   const isFaculty = currentUser?.role === "FACULTY";
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -26,7 +28,7 @@ function Assignments() {
 
   const fetchAssignments = async () => {
     const assignments = await coursesClient.findAssignmentsForCourse(
-      courseId as string
+      cid as string
     );
     dispatch(setAssignments(assignments));
   };
@@ -34,9 +36,9 @@ function Assignments() {
     fetchAssignments();
   }, []);
 
-  const removeAssignment = async (assignmentId: string) => {
-    await assignmentsClient.deleteAssignment(assignmentId);
-    dispatch(deleteAssignment(assignmentId));
+  const removeAssignment = async (aid: string) => {
+    await assignmentsClient.deleteAssignment(aid);
+    dispatch(deleteAssignment(aid));
   };
 
   // Open the confirmation dialog with the selected assignment
@@ -84,7 +86,7 @@ function Assignments() {
                   <div>
                        <a
                         className="wd-assignment-link text-dark fw-bold fs-5 text-decoration-none"
-                        href={`#/Kanbas/Courses/${courseId}/Assignments/${assignment._id}`}
+                        href={`#/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}
                       >
                         {assignment.title}
                       

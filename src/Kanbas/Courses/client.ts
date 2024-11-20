@@ -1,6 +1,7 @@
 import axios from "axios";
 const REMOTE_SERVER = process.env.REACT_APP_REMOTE_SERVER;
 const COURSES_API = `${REMOTE_SERVER}/api/courses`;
+
 export const fetchAllCourses = async () => {
   const { data } = await axios.get(COURSES_API);
   return data;
@@ -13,28 +14,28 @@ export const updateCourse = async (course: any) => {
   const { data } = await axios.put(`${COURSES_API}/${course._id}`, course);
   return data;
 };
-export const findModulesForCourse = async (courseId: string) => {
+export const findModulesForCourse = async (cid: string) => {
   const response = await axios
-    .get(`${COURSES_API}/${courseId}/modules`);
+    .get(`${COURSES_API}/${cid}/modules`);
   return response.data;
 };
-export const createModuleForCourse = async (courseId: string, module: any) => {
+export const createModuleForCourse = async (cid: string, module: any) => {
   const response = await axios.post(
-    `${COURSES_API}/${courseId}/modules`,
+    `${COURSES_API}/${cid}/modules`,
     module
   );  return response.data;
 };
 
-export const findAssignmentsForCourse = async (courseId: string) => {
-  const response = await axios.get(`${COURSES_API}/${courseId}/assignments`);
+export const findAssignmentsForCourse = async (cid: string) => {
+  const response = await axios.get(`${COURSES_API}/${cid}/assignments`);
   return response.data;
 };
 export const createAssignmentForCourse = async (
-  courseId: string,
+  cid: string,
   assignment: any
 ) => {
   const response = await axios.post(
-    `${COURSES_API}/${courseId}/assignments/new`,
+    `${COURSES_API}/${cid}/assignments/new`,
     assignment
   );
   return response.data;

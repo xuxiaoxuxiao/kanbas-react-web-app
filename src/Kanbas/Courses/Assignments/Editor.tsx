@@ -7,38 +7,35 @@ import * as assignmentsClient from "./client";
 import {addAssignment, updateAssignment,} from "./Reducer";
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-//import { KanbasState } from "../../store";
+
 
 function AssignmentEditor() {
-  const { courseId,assignmentId } = useParams();
-  console.log("assignmentId:", assignmentId);
-  console.log("courseId:", courseId);
+  const { cid, aid } = useParams();
+  console.log("aid:", aid);
+  console.log("cid:", cid);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  //const { assignments } = useSelector((state: any) => state.assignmentReducer);
-  const { assignments } = useSelector((state: any) => state.assignmentReducer || { assignments: [] });
+
+  const { assignments } = useSelector((state: any) => state.assignments || { assignments: [] });
 
   const existingAssignment = assignments.find(
-    (assignment: any) => assignment._id === assignmentId 
+    (assignment: any) => assignment._id === aid && assignment.course === cid
   );
+  console.log("existingAssignment:", existingAssignment);
 
-  // const existingAssignment = useSelector((state: any) => state.assignmentReducer.assignments.find(
-  //     (assignment: { _id: string | undefined; }) => assignment._id === assignmentId
-  //   )
-  // );
   const [assignment, setAssignment] = useState(
     existingAssignment || {
       title: "",
-      description: "",
+      description: "",  
       points: 100,
       dueDate: "",
       availableFrom: "",
       availableUntil: "",
-      course: courseId,
+      course: cid,
     }
   );
 
-  console.log("assignmentId:", assignmentId);
+  console.log("aid:", aid);
   console.log("existingAssignment:", existingAssignment);
   const handleSave = () => {
     if (existingAssignment) {
@@ -46,12 +43,12 @@ function AssignmentEditor() {
     } else {
       createAssignment({ ...assignment, _id: new Date().getTime().toString() });
     }
-    navigate(`/Kanbas/Courses/${courseId}/Assignments`);
+    navigate(`/Kanbas/Courses/${cid}/Assignments`);
   };
 
   const createAssignment = async (assignment: any) => {
     const newAssignment = await coursesClient.createAssignmentForCourse(
-      courseId as string,
+      cid as string,
       assignment
     );
     dispatch(addAssignment(newAssignment));
@@ -228,7 +225,7 @@ function AssignmentEditor() {
               <div className="d-flex justify-content-between" style={{ paddingTop: "15px" }}>
                  
                   <span>
-                      <Link to={`/Kanbas/Courses/${courseId}/Assignments`}
+                      <Link to={`/Kanbas/Courses/${cid}/Assignments`}
                           
                           className="btn me-4" style={{ height: "fit-content", backgroundColor: "#E0E0E0" }}>
                           Cancel

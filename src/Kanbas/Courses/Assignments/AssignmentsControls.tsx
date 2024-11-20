@@ -7,7 +7,7 @@ export default function AssignmentsControls() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const isFaculty = currentUser?.role === "FACULTY";
   const navigate = useNavigate();
-  const { courseId } = useParams();
+  const { cid } = useParams();
   return (
     <div className="d-flex justify-content-between mb-4">
       
@@ -29,7 +29,7 @@ export default function AssignmentsControls() {
             + Group
           </button>
           <div className="wd-button float-end">
-                <button  onClick={() => navigate(`/Kanbas/Courses/${courseId}/Assignments/new`)}
+                <button  onClick={() => navigate(`/Kanbas/Courses/${cid}/Assignments/new`)}
               className="btn wd-add-assignment btn-danger me-2">
 
                   + Assignment
