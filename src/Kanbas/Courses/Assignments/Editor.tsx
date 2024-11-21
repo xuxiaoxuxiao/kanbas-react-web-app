@@ -1,7 +1,5 @@
-import { RxCross2 } from "react-icons/rx";
-import React, { useEffect, useState } from "react";
 
-import { useLocation } from "react-router-dom";
+import { useState } from "react";
 import * as coursesClient from "../client";
 import * as assignmentsClient from "./client";
 import {addAssignment, updateAssignment,} from "./Reducer";
@@ -28,9 +26,9 @@ function AssignmentEditor() {
       title: "",
       description: "",  
       points: 100,
-      dueDate: "",
+      dueDateDate: "",
       availableFrom: "",
-      availableUntil: "",
+      availabity: "",
       course: cid,
     }
   );
@@ -58,9 +56,9 @@ function AssignmentEditor() {
     dispatch(updateAssignment(assignment));
   };
 
-  const location =useLocation();
-  const readOnly = location.state?.readOnly || false;
 
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const isFaculty = currentUser?.role === "FACULTY";
   return (
     
       <div>
@@ -171,11 +169,11 @@ function AssignmentEditor() {
                       />
                       <br />
                       <b>Due</b>
-                      <input className="form-control" type="datetime-local" value={assignment.dueDate}
+                      <input className="form-control" type="datetime-local" value={assignment.dueDateDate}
                          onChange={(e) =>
                           setAssignment({
                             ...assignment,
-                            dueDate: e.target.value,
+                            dueDateDate: e.target.value,
                           })
                         }/>
 
@@ -221,7 +219,7 @@ function AssignmentEditor() {
           <br />
           <hr />
           <div className="d-flex justify-content-end">
-            {!readOnly &&
+            {isFaculty &&<>
               <div className="d-flex justify-content-between" style={{ paddingTop: "15px" }}>
                  
                   <span>
@@ -235,7 +233,7 @@ function AssignmentEditor() {
                           Save
                       </button>
                   </span>
-              </div>}
+              </div></>}
               <br />< br />
 
           </div>

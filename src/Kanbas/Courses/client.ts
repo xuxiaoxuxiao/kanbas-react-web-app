@@ -14,28 +14,28 @@ export const updateCourse = async (course: any) => {
   const { data } = await axios.put(`${COURSES_API}/${course._id}`, course);
   return data;
 };
-export const findModulesForCourse = async (cid: string) => {
+export const findModulesForCourse = async (courseId: string) => {
   const response = await axios
-    .get(`${COURSES_API}/${cid}/modules`);
+    .get(`${COURSES_API}/${courseId}/modules`);
   return response.data;
 };
-export const createModuleForCourse = async (cid: string, module: any) => {
+export const createModuleForCourse = async (courseId: string, module: any) => {
   const response = await axios.post(
-    `${COURSES_API}/${cid}/modules`,
+    `${COURSES_API}/${courseId}/modules`,
     module
   );  return response.data;
 };
 
-export const findAssignmentsForCourse = async (cid: string) => {
-  const response = await axios.get(`${COURSES_API}/${cid}/assignments`);
+export const findAssignmentsForCourse = async (courseId: string) => {
+  const response = await axios.get(`${COURSES_API}/${courseId}/assignments`);
   return response.data;
 };
 export const createAssignmentForCourse = async (
-  cid: string,
+  courseId: string,
   assignment: any
 ) => {
   const response = await axios.post(
-    `${COURSES_API}/${cid}/assignments/new`,
+    `${COURSES_API}/${courseId}/assignments/new`,
     assignment
   );
   return response.data;

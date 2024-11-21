@@ -19,6 +19,7 @@ const store = configureStore({
     accountReducer,
     // assignmentReducer,
     assignments: assignmentReducer,
+    enrollmentReducer,
   }
 });
 

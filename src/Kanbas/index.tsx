@@ -35,9 +35,9 @@ export default function Kanbas() {
     })
   );};
 
-  const deleteCourse = async (cid: string) => {
-    const status = await courseClient.deleteCourse(cid);
-    setCourses(courses.filter((course) => course._id !== cid));
+  const deleteCourse = async (courseId: string) => {
+    const status = await courseClient.deleteCourse(courseId);
+    setCourses(courses.filter((course) => course._id !== courseId));
   };
 
   const addNewCourse = async () => {
@@ -53,7 +53,7 @@ export default function Kanbas() {
     try {
       courses = await userClient.findMyCourses();
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
     setCourses(courses);
   };
@@ -79,7 +79,7 @@ export default function Kanbas() {
                  addNewCourse={addNewCourse}
                  deleteCourse={deleteCourse}
                  updateCourse={updateCourse}
-                 addCourse={(newCourse) => setCourses([...courses, newCourse])}            
+                //  addCourse={(newCourse) => setCourses([...courses, newCourse])}            
                       
                   />
                 </ProtectedRoute>
