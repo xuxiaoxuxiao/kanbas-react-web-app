@@ -87,7 +87,7 @@ export default function Dashboard({
     <div id="wd-dashboard">
       <h1>Dashboard</h1>
       <hr />
-      <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2>
+      <h2 id="wd-dashboard-published">Published Courses ({localCourses.length})</h2>
       <hr />
 
       {/* Faculty Controls */}
@@ -128,7 +128,7 @@ export default function Dashboard({
       {/* Student Controls */}
       {isStudent && (
         <button className="btn btn-primary float-end" onClick={toggleCourseList}>
-          {showAllCourses ? "Show Enrolled Courses" : "Show All Courses"}
+          {showAllCourses ? "Enrollment" : "All Courses"}
         </button>
       )}
 
