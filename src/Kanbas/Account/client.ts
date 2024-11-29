@@ -3,6 +3,10 @@ const axiosWithCredentials = axios.create({ withCredentials: true });
 
 export const REMOTE_SERVER = process.env.REACT_APP_REMOTE_SERVER;
 export const USERS_API = `${REMOTE_SERVER}/api/users`;
+export const findAllUsers = async () => {
+  const response = await axiosWithCredentials.get(USERS_API);
+  return response.data;
+};
 
 export const signin = async (credentials: any) => {
   const response = await axiosWithCredentials.post( `${USERS_API}/signin`, credentials );
@@ -33,4 +37,14 @@ export const signup = async (user: any) => {
     const { data } = await axiosWithCredentials.post(`${USERS_API}/current/courses`, course);
     return data;
   };
+  export const findUsersByRole = async (role: string) => {
+    const response = await
+      axios.get(`${USERS_API}?role=${role}`);
+    return response.data;
+  };
+  export const findUsersByPartialName = async (name: string) => {
+    const response = await axios.get(`${USERS_API}?name=${name}`);
+    return response.data;
+  };
+  
   
