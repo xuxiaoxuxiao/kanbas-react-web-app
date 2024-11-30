@@ -34,7 +34,7 @@ export default function PeopleDetails() {
     navigate(-1);
   };
 
-  const roles = ["ADMIN", "FACULTY", "STUDENT","TA"]; 
+  const roles = ["ADMIN", "FACULTY", "STUDENT","USER"]; 
 
   useEffect(() => {
     if (uid) fetchUser();  
