@@ -4,8 +4,8 @@ import Account from "./Account";
 import Dashboard from "./Dashboard";
 import KanbasNavigation from "./Navigation";
 import Courses from "./Courses";
-import * as client from "./Courses/client";
 import * as courseClient from "./Courses/client";
+
 import "./styles.css";
 import Labs from "../Labs";
 
@@ -41,7 +41,7 @@ export default function Kanbas() {
   };
 
   const addNewCourse = async () => {
-    const newCourse = await userClient.createCourse(course);
+    const newCourse = await courseClient.createCourse(course);
     setCourses([ ...courses, newCourse ]);
   };
 
@@ -49,14 +49,14 @@ export default function Kanbas() {
 
   
   const fetchCourses = async () => {
-    let courses = [];
     try {
-      courses = await userClient.findMyCourses();
+      const courses = await courseClient.fetchAllCourses();
+      setCourses(courses);
     } catch (error) {
-      // console.error(error);
+      console.error(error);
     }
-    setCourses(courses);
   };
+ 
 
 
   useEffect(() => {
