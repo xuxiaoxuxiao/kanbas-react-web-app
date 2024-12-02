@@ -16,6 +16,7 @@ import Session from "./Account/Session";
 
 
 export default function Kanbas() {
+
   const [courses, setCourses] = useState<any[]>([]);
   const [course, setCourse] = useState<any>({
     _id: "1234",
@@ -26,6 +27,27 @@ export default function Kanbas() {
     description: "New Description",
   });
   const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const [enrolling, setEnrolling] = useState<boolean>(false);
+
+  const fetchCourses = async () => {
+    try {
+      const courses = await courseClient.fetchAllCourses();
+      setCourses(courses);
+    } catch (error) {
+      console.error(error);
+    }
+  };  
+  // useEffect(() => {
+  //   fetchCourses();
+  // }, [currentUser]);
+ 
+  useEffect(() => {
+    if (enrolling) {
+      fetchCourses();
+    } else {
+      fetchCourses();
+    }
+  }, [currentUser, enrolling]);
 
   const updateCourse = async () => {
     await courseClient.updateCourse(course);
@@ -45,23 +67,13 @@ export default function Kanbas() {
     setCourses([ ...courses, newCourse ]);
   };
 
+  function updateEnrollment(courseId: string, enrolled: boolean): void {
+    throw new Error("Function not implemented.");
+  }
+
   //const findAllCourses = async () => {...};
 
-  
-  const fetchCourses = async () => {
-    try {
-      const courses = await courseClient.fetchAllCourses();
-      setCourses(courses);
-    } catch (error) {
-      console.error(error);
-    }
-  };
- 
 
-
-  useEffect(() => {
-    fetchCourses();
-  }, [currentUser]);
 
   return (
         <div id="wd-kanbas">
@@ -79,6 +91,9 @@ export default function Kanbas() {
                  addNewCourse={addNewCourse}
                  deleteCourse={deleteCourse}
                  updateCourse={updateCourse}
+                 enrolling={enrolling}
+                 setEnrolling={setEnrolling}
+                updateEnrollment={updateEnrollment}
                 //  addCourse={(newCourse) => setCourses([...courses, newCourse])}            
                       
                   />

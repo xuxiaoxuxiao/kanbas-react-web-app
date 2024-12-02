@@ -1,10 +1,6 @@
-import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import * as courseClient from "../Courses/client";
-import * as accountClient from "../Account/client";
-import * as enrollmentClient from "./enrollmentsClient";
-import { enrollCourse, unenrollCourse } from "./reducer";
+import { useSelector } from "react-redux";
+
 
 export default function Dashboard({
   courses,
@@ -13,6 +9,9 @@ export default function Dashboard({
   addNewCourse,
   deleteCourse,
   updateCourse,
+  enrolling,
+  setEnrolling,
+  updateEnrollment
 }: {
   courses: any[];
   course: any;
@@ -20,74 +19,25 @@ export default function Dashboard({
   addNewCourse: () => void;
   deleteCourse: (course: any) => void;
   updateCourse: () => void;
+  enrolling: boolean;
+  setEnrolling: (enrolling: boolean) => void;
+  updateEnrollment: (courseId: string, enrolled: boolean) => void;
 }) {
   // State and Redux Hooks
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // Role Determination
   const isStudent = currentUser?.role === "STUDENT";
   const isFaculty = currentUser?.role === "FACULTY";
 
-  // State Variables
-  const [localCourses, setLocalCourses] = useState<any[]>([]);
-  const [enrolledCourses, setEnrolledCourses] = useState<any[]>([]);
-  const [showAllCourses, setShowAllCourses] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  // Effect: Fetch Enrolled Courses
-  useEffect(() => {
-    const fetchEnrolledCourses = async () => {
-      const courses = await accountClient.findMyCourses();
-      setEnrolledCourses(courses);
-      setLocalCourses(courses);
-    };
-    fetchEnrolledCourses();
-  }, [currentUser]);
-
-  // Handlers
-  const handleEnroll = async (courseId: any) => {
-    setLoading(true);
-    try {
-      await enrollmentClient.enrollCourse(currentUser._id, courseId);
-      const updatedCourses = await accountClient.findMyCourses();
-      setEnrolledCourses(updatedCourses);
-      dispatch(enrollCourse({ userId: currentUser._id, courseId }));
-    } catch (error) {
-      console.error("Enrollment failed:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleUnenroll = async (courseId: string) => {
-    try {
-      await enrollmentClient.unenrollCourse(currentUser._id, courseId);
-      const updatedCourses = await accountClient.findMyCourses();
-      setLocalCourses(updatedCourses);
-      setEnrolledCourses(updatedCourses);
-      dispatch(unenrollCourse({ userId: currentUser._id, courseId }));
-    } catch (error) {
-      console.error("Unenrollment failed:", error);
-    }
-  };
-
-  const toggleCourseList = async () => {
-    setShowAllCourses((prev) => !prev);
-    if (!showAllCourses) {
-      const allCourses = await courseClient.fetchAllCourses();
-      setLocalCourses(allCourses);
-    } else {
-      setLocalCourses(enrolledCourses);
-    }
-  };
 
   // Render
   return (
     <div id="wd-dashboard">
       <h1>Dashboard</h1>
       <hr />
-      <h2 id="wd-dashboard-published">Published Courses ({localCourses.length})</h2>
+     {/* <h2 id="wd-dashboard-published">Published Courses ({localCourses.length})</h2> */}
       <hr />
 
       {/* Faculty Controls */}
@@ -127,15 +77,27 @@ export default function Dashboard({
 
       {/* Student Controls */}
       {isStudent && (
-        <button className="btn btn-primary float-end" onClick={toggleCourseList}>
-          {showAllCourses ? "Enrollment" : "All Courses"}
+        // <button className="btn btn-primary float-end" onClick={toggleCourseList}>
+        //   {showAllCourses ? "Enrollment" : "All Courses"}
+        // </button>
+        <button
+          onClick={() => setEnrolling(!enrolling)}
+          className="float-end btn btn-primary"
+        >
+          {enrolling ? "My Courses" : "All Courses"}
         </button>
       )}
 
       {/* Course List */}
+      <h2 id="wd-dashboard-published">
+        {enrolling
+          ? "Published Courses (" + courses.length + ")"
+          : "Enrolled Courses (" + courses.length + ")"}
+      </h2>{" "}
       <div className="row mt-3">
         <h2>All Courses</h2>
-        {localCourses.map((course) => (
+        {/* changed from localCourses to courses */}
+        {courses.map((course) => (
           <div className="col-md-4 col-sm-6" key={course._id} style={{ width: "300px" }}>
             <div className="card rounded-3 overflow-hidden mb-3">
               <Link
@@ -143,7 +105,7 @@ export default function Dashboard({
                 className="text-decoration-none text-dark"
               >
                 <img
-                  src={`/images/${course._id}.jpg`}
+                  src={`/images/${course.number}.jpg`}
                   onError={(e) => (e.currentTarget.src = "/images/darkblue.jpg")}
                   className="card-img-top"
                   style={{ height: "160px", objectFit: "cover" }}
@@ -160,7 +122,7 @@ export default function Dashboard({
                     Go
                   </Link>
 
-                  {/* Student Actions */}
+                  {/* Student Actions
                   {isStudent &&
                     (enrolledCourses.some((c) => c._id === course._id) ? (
                       <button
@@ -182,7 +144,7 @@ export default function Dashboard({
                       >
                         Enroll
                       </button>
-                    ))}
+                    ))} */}
 
                   {/* Faculty Actions */}
                   {isFaculty && (
