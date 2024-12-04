@@ -37,9 +37,12 @@ export default function Dashboard({
     <div id="wd-dashboard">
       <h1>Dashboard</h1>
       <hr />
-     {/* <h2 id="wd-dashboard-published">Published Courses ({localCourses.length})</h2> */}
-      <hr />
+      <button onClick={() => setEnrolling(!enrolling)} className="float-end btn btn-primary" >
+          {enrolling ? "My Courses" : "All Courses"}
+      </button><br />
 
+      <hr />
+      <br />
       {/* Faculty Controls */}
       {isFaculty && (
         <>
@@ -76,7 +79,7 @@ export default function Dashboard({
       )}
 
       {/* Student Controls */}
-      {isStudent && (
+      {/* {isStudent && (
         // <button className="btn btn-primary float-end" onClick={toggleCourseList}>
         //   {showAllCourses ? "Enrollment" : "All Courses"}
         // </button>
@@ -86,7 +89,7 @@ export default function Dashboard({
         >
           {enrolling ? "My Courses" : "All Courses"}
         </button>
-      )}
+      )} */}
 
       {/* Course List */}
       <h2 id="wd-dashboard-published">
@@ -111,13 +114,26 @@ export default function Dashboard({
                   style={{ height: "160px", objectFit: "cover" }}
                 />
                 <div className="card-body">
-                  <h5 className="card-title">{course.name}</h5>
+                  <h5 className="card-title">
+                  
+                    {course.name}</h5>
                   <p
                     className="card-text overflow-y-hidden"
                     style={{ maxHeight: 100 }}
                   >
                     {course.description}
                   </p>
+                  {isStudent && enrolling && (
+                    <button
+                      onClick={(event) => {
+                        event.preventDefault();
+                        updateEnrollment(course._id, !course.enrolled);
+                      }}
+                      className={`btn ${course.enrolled ? "btn-danger" : "btn-success"} float-end`}
+                    >
+                      {course.enrolled ? "Unenroll" : "Enroll"}
+                    </button>
+                  )}
                   <Link to={`/Kanbas/Courses/${course._id}`} className="btn btn-primary">
                     Go
                   </Link>
