@@ -99,7 +99,7 @@ export default function Dashboard({
       </h2>{" "}
       <div className="row mt-3">
         <h2>All Courses</h2>
-        {/* changed from localCourses to courses */}
+       
         {courses.map((course) => (
           <div className="col-md-4 col-sm-6" key={course._id} style={{ width: "300px" }}>
             <div className="card rounded-3 overflow-hidden mb-3">
