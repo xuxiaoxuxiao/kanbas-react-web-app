@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import React from "react";
 import ProtectedFacultyRoute from "./Courses/ProtectedFacultyRoute";
 import ProtectedStudentRoute from "./Courses/ProtectedStudentRoute";
 
@@ -56,10 +55,10 @@ export default function Dashboard(
           {courses
             .map((course) => (
               <div key={course._id} className="wd-dashboard-course col" style={{ width: "300px" }}>
-                <div className="card rounded-3 overflow-hidden h-100">
+                {/*<div className="card rounded-3 overflow-hidden h-100">
                   <Link className="wd-dashboard-course-link text-decoration-none text-dark"
                     to={getCourseLink(course._id)}>
-                    {/* <img src={`/images/${course.image}`} width="100%" height={160} /> */}
+               
                     <img
                       src={`/images/${course.number}.jpg`}
                       onError={(e) => (e.currentTarget.src = "/images/darkblue.jpg")}
@@ -108,6 +107,53 @@ export default function Dashboard(
                       </ProtectedFacultyRoute>
                     </div>
                   </Link>
+                </div>*/}
+                <div className="card rounded-3 overflow-hidden h-100 d-flex flex-column">
+                  <Link
+                    className="wd-dashboard-course-link text-decoration-none text-dark flex-grow-1"
+                    to={getCourseLink(course._id)}
+                  >
+                    <img
+                      src={`/images/${course.number}.jpg`}
+                      onError={(e) => (e.currentTarget.src = "/images/darkblue.jpg")}
+                      className="card-img-top"
+                      style={{ height: "160px", objectFit: "cover" }}
+                    />
+                    <div className="card-body d-flex flex-column">
+                      <h5 className="wd-dashboard-course-title card-title">{course.name}</h5>
+                      <p
+                        className="wd-dashboard-course-title card-text overflow-y-hidden flex-grow-1"
+                        style={{ maxHeight: 100 }}
+                      >
+                        {course.description}
+                      </p>
+                    </div>
+                  </Link>
+                  <div className="card-footer d-flex ">
+                    <button className="btn btn-primary me-2">Go</button>
+                    <ProtectedFacultyRoute>
+                      <button
+                        id="wd-edit-course-click"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          setCourse(course);
+                        }}
+                        className="btn btn-warning me-2 "
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={(event) => {
+                          event.preventDefault();
+                          deleteCourse(course._id);
+                        }}
+                        className="btn btn-danger float-end"
+                        id="wd-delete-course-click"
+                      >
+                        Delete
+                      </button>
+                    </ProtectedFacultyRoute>
+                  </div>
                 </div>
               </div>))}
 

@@ -65,3 +65,10 @@ body * {
     /* Hide the navbar */
   }
 }
+
+.card-footer {
+  background-color: transparent;
+  border-top: none;
+  padding: 0.75rem;
+}
+
