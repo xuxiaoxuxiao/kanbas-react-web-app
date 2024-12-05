@@ -1,157 +1,150 @@
 import { BsGripVertical } from "react-icons/bs";
-import { PiNotePencilBold } from "react-icons/pi";
-import { useNavigate, useParams } from "react-router";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import AssignmentsControls from "./AssignmentsControls";
-import { deleteAssignment,setAssignments } from "./Reducer";
-import AssignmentsHeaderButtons from "./AssignmentsHeaderButtons";
-
+import { IoIosSearch } from "react-icons/io";
+import LessonControlButtons from "../Modules/LessonControlButtons";
+import { TfiWrite } from "react-icons/tfi";
+import { FaPlus } from "react-icons/fa6";
+import { useNavigate, useParams } from "react-router-dom";
+import ProtectedFacultyRoute from "../ProtectedFacultyRoute";
+import { addAssignment, deleteAssignment, setAssignments }
+  from "./reducer";
 import { FaTrash } from "react-icons/fa";
 import * as coursesClient from "../client";
-import * as assignmentsClient from "./client";
+import * as assignmentClient from "./client";
+import { useSelector, useDispatch } from "react-redux";
+import { JSXElementConstructor, ReactElement, ReactNode, ReactPortal, useEffect, useState } from "react";
+import AssignmentDeletor from "./AssignmentDeletor";
+import ProtectedStudentRoute from "../ProtectedStudentRoute";
 
-
-function Assignments() {
+export default function Assignments() {
   const { cid } = useParams();
-  const { assignments } = useSelector((state: any) => state.assignments);
-  const { currentUser } = useSelector((state: any) => state.accountReducer);
-  
-  console.log("cid:", cid);
-
-  const isFaculty = currentUser?.role === "FACULTY";
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const [showDialog, setShowDialog] = useState(false);
-  const [selectedAssignment, setSelectedAssignment] = useState<any>(null);
-
+  const dispatch = useDispatch();
+  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
   const fetchAssignments = async () => {
-    const assignments = await coursesClient.findAssignmentsForCourse(
-      cid as string
-    );
+    const assignments = await coursesClient.findAssignmentForCourse(cid as string);
     dispatch(setAssignments(assignments));
   };
   useEffect(() => {
     fetchAssignments();
   }, []);
 
-  const removeAssignment = async (aid: string) => {
-    await assignmentsClient.deleteAssignment(aid);
-    dispatch(deleteAssignment(aid));
+  const createAssignmentForCourse = async () => {
+    if (!cid) return;
+    const newAssignment = {
+      title: 'New Assignment',
+      course: cid,
+      description: "New Assignment Description",
+      points: 100,
+      due_date: "",
+      available_date: "",
+      available_until_date: ""
+    };
+    const assignment = await coursesClient.createAssignmentForCourse(cid, newAssignment);
+    dispatch(addAssignment(assignment));
+    navigate(`/Kanbas/Courses/${cid}/Assignments/${assignment._id}`, { state: { isNewAssignment: true } });
   };
 
-  // Open the confirmation dialog with the selected assignment
-  const handleDeleteClick = (assignment: any) => {
-    setSelectedAssignment(assignment);
-    setShowDialog(true);
-  };
-   // Confirm deletion and remove the assignment
-   const confirmDelete = () => {
-    if (selectedAssignment) {
-      removeAssignment(selectedAssignment._id);
-    }
-    setShowDialog(false); // Close dialog
-    setSelectedAssignment(null); // Reset selection
-  };
-
-  // Cancel deletion and close the dialog
-  const cancelDelete = () => {
-    setShowDialog(false);
-    setSelectedAssignment(null);
+  const removeAssignment = async (assignmentId: string) => {
+    await assignmentClient.deleteAssignment(assignmentId);
+    dispatch(deleteAssignment(assignmentId));
   };
 
   return (
-    <div id="wd-assignments">      
-       <AssignmentsControls />
-      <hr />
-      <br />
-      <div className="wd-assignments-list">
-        <ul id="wd-assignments-list" className="list-group rounded-0">
-          <li className="wd-assignment list-group-item p-0 mb-5 fs-5 border-gray">   
-            <div className="wd-title p-3 ps-2 bg-light d-flex justify-content-between align-items-center">
-              <div>
-                <BsGripVertical className="wd-assignments-title me-2 fs-3" />
-                ASSIGNMENTS
-              </div>
-              <AssignmentsHeaderButtons />
+    <div id="wd-assignments" className="pb-1">
+
+      <div className="wd-assignment-controls">
+        <div className="wd-search-assignment input-group float-start w-25">
+          <span className="input-group-text input-lg">
+            <IoIosSearch />
+          </span>
+          <input
+            id="wd-search-assignment"
+            placeholder="Search..."
+            className="form-control form-control-lg"
+          />
+        </div>
+        <ProtectedFacultyRoute>
+          <button id="wd-add-assignment"
+            onClick={() => {
+              createAssignmentForCourse()
+            }}
+            className="btn btn-lg btn-danger me-1 float-end">
+            + Assignment</button>
+          <button id="wd-add-assignment-group" className="btn btn-lg btn-secondary me-1 float-end">+ Group</button>
+        </ProtectedFacultyRoute><br /><br /><br />
+      </div>
+
+      <ul id="wd-modules" className="list-group rounded-0">
+        <li className="wd-module list-group-item p-0 mb-5 fs-5 border-gray">
+          <div className="wd-title p-3 ps-2 bg-secondary">
+            <BsGripVertical className="me-2 fs-3" />
+            Assignments
+            <div className="wd-percentage float float-end">
+              <span className="wd-percentage border border-dark rounded rounded-pill p-2 me-3"> 40% of Total </span>
+              <FaPlus className="me-3" />
+              <LessonControlButtons />
             </div>
-          
-          <ul className="wd-lesson list-group rounded-0">
-            {assignments.map((assignment:any) => (
-              <li className="wd-assignment-list-item list-group-item p-3 ps-1 d-flex justify-content-between align-items-center">
-                <div className="d-flex align-items-start flex-grow-1 align-items-center">      
-                    <BsGripVertical className="me-2 fs-3" />
-                    <PiNotePencilBold className="me-2 fs-3" />       
-                  <div>
-                       <a
-                        className="wd-assignment-link text-dark fw-bold fs-5 text-decoration-none"
-                        href={`#/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}
-                      >
-                        {assignment.title}
-                      
-                      </a>
-                    <br />
-                    <div className="text-muted small mt-1">
-                      <span className="text-danger"> Multiple Modules</span> |  
-                      <span> <b>Available until</b> {assignment.availableUntil}</span> |
-                      <br /><b>Due</b> {assignment.dueDate} |
-                      <span>{assignment.points} pts </span>
-                    </div>
-                  </div>
-                  
-                  </div>
-                  {isFaculty && 
-                    <div className="btn m-0 pt-0 pb-0 me-1 btn-danger btn-sm"
-                      onClick={() => handleDeleteClick(assignment)}
-                      >
-                      < FaTrash />
-                    </div> 
-                   }
+          </div>
+
+          <ul className="wd-assignments list-group rounded-0 ">
+            {assignments.map((assignment: {
+              available_date: string;
+              due_date: string;
+              points: string;
+              _id: any;
+              title: string;
+            }) => (
+              <li className="wd-assignment-link list-group-item p-3 ps-1 d-flex justify-content-between align-items-center">
+                <ProtectedFacultyRoute>
+                  <button
+                    onClick={() => {
+                      navigate(`/Kanbas/Courses/${cid}/Assignments/${assignment._id}`, { state: { isNewAssignment: false } });
+                    }}
+                    className="wd-assignment text-reset text-decoration-none d-flex align-items-center btn btn-link text-start">
+                    <BsGripVertical className="me-4 fs-3" />
+                    <TfiWrite className="me-4 fs-3 text-success" />
+                    <span className="wd-assignment-text me-2">
+                      <b>{assignment.title}</b>
+                      <br />
+                      <span className="text-danger">Multiple Modules </span> | <b>Not available until</b> {assignment.available_date} | <br />
+                      <b> Due</b> {assignment.due_date ? new Date(assignment.due_date).toLocaleDateString() : "N/A"}  | {assignment.points} pts
+                    </span>
+                  </button>
+                </ProtectedFacultyRoute>
+                <ProtectedStudentRoute>
+                  <button
+                    className="wd-assignment text-reset text-decoration-none d-flex align-items-center btn btn-link text-start">
+                    <BsGripVertical className="me-4 fs-3" />
+                    <TfiWrite className="me-4 fs-3 text-success" />
+                    <span className="wd-assignment-text me-2">
+                      <b>{assignment.title}</b>
+                      <br />
+                      <span className="text-danger">Multiple Modules </span> | <b>Not available until</b> {assignment.available_date} | <br />
+                      <b> Due</b> {assignment.due_date ? new Date(assignment.due_date).toLocaleDateString() : "N/A"} | {assignment.points} pts
+                    </span>
+                  </button>
+                </ProtectedStudentRoute>
+                <div className="d-flex align-items-center">
+                  <LessonControlButtons />
+                  <ProtectedFacultyRoute>
+                    <button id="wd-delete-assignment-btn"
+                      className="btn btn-link ms-2 fs-5"
+                      data-bs-toggle="modal" data-bs-target="#wd-add-module-dialog">
+                      <FaTrash />
+                    </button>
+                    <AssignmentDeletor dialogTitle="Delete Assignment"
+                      deleteAssignment={() =>
+                        removeAssignment(assignment._id)
+                      } />
+                  </ProtectedFacultyRoute>
+
+                </div>
               </li>
             ))}
           </ul>
-          </li>
-        </ul>
-        {showDialog && (
-          <div className="modal show d-block" tabIndex={-1}>
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title">Confirm Delete</h5>
-                  <button
-                    type="button"
-                    className="btn-close"
-                    aria-label="Close"
-                    onClick={cancelDelete}
-                  ></button>
-                </div>
-                <div className="modal-body">
-                  <p>Are you sure you want to delete this assignment?</p>
-                </div>
-                <div className="modal-footer">
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    onClick={cancelDelete}
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-danger"
-                    onClick={confirmDelete}
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
+
+        </li>
+      </ul >
     </div >
- 
   );
 }
-export default Assignments;
