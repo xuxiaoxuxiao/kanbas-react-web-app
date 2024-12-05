@@ -108,6 +108,8 @@ export default function Dashboard(
                     </div>
                   </Link>
                 </div>*/}
+
+                
                 <div className="card rounded-3 overflow-hidden h-100 d-flex flex-column">
                   <Link
                     className="wd-dashboard-course-link text-decoration-none text-dark flex-grow-1"
@@ -131,6 +133,7 @@ export default function Dashboard(
                   </Link>
                   <div className="card-footer d-flex ">
                     <button className="btn btn-primary me-2">Go</button>
+                    <div className="ms-auto">
                     <ProtectedFacultyRoute>
                       <button
                         id="wd-edit-course-click"
@@ -153,9 +156,11 @@ export default function Dashboard(
                         Delete
                       </button>
                     </ProtectedFacultyRoute>
+                    </div>
                   </div>
                 </div>
-              </div>))}
+              </div>
+            ))}
 
         </div>
       </div>
